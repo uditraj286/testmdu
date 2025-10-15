@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desk Messages - Gyan Niketan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="logo.png">
+     <script src="protect.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#f59e0b',
+                        accent: '#3b82f6',
+                        glass: 'rgba(255, 255, 255, 0.1)',
+                        glassDark: 'rgba(15, 23, 42, 0.8)',
+                    },
+                    animation: {
+                        'float': 'float 8s ease-in-out infinite',
+                        'fade-in': 'fadeIn 1.2s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'shimmer': 'shimmer 3s linear infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 15s linear infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'wave': 'wave 20s ease-in-out infinite',
+                        'morph': 'morph 12s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Enhanced Keyframe Animations */
+        @keyframes float { 
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); } 
+            33% { transform: translateY(-25px) rotate(120deg) scale(1.1); }
+            66% { transform: translateY(-15px) rotate(240deg) scale(0.9); }
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px);} to { opacity: 1; transform: translateY(0);} }
+        @keyframes shimmer { 
+            0% { background-position: -200% 0; } 
+            100% { background-position: 200% 0; } 
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes wave {
+            0%, 100% { 
+                clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+            }
+            50% { 
+                clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
+            }
+        }
+        @keyframes morph {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+        }
+
+        /* Enhanced Background Effects */
+        .bg-animated {
+            background: linear-gradient(-45deg, #f8fafc, #e2e8f0, #cbd5e1, #f1f5f9, #fef3c7, #fef7cd);
+            background-size: 600% 600%;
+            animation: gradientMove 20s ease infinite;
+        }
+        
+        .floating-elements { 
+            position: fixed; 
+            inset: 0; 
+            overflow: hidden; 
+            pointer-events: none; 
+            z-index: 0; 
+        }
+        
+        .floating-element { 
+            position: absolute; 
+            opacity: 0.08; 
+            animation: float 12s ease-in-out infinite; 
+        }
+        
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        
+        .card-enhanced { 
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.4), transparent);
+            transition: left 0.5s;
+            z-index: 1;
+        }
+        
+        .card-enhanced:hover::before {
+            left: 100%;
+        }
+        
+        .card-enhanced:hover { 
+            transform: translateY(-15px) rotateX(3deg) scale(1.02); 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(245, 158, 11, 0.1); 
+        }
+
+        /* Advanced Gradient Text */
+        .gradient-text { 
+            background: linear-gradient(135deg, #f59e0b, #f97316, #ef4444, #ec4899); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text;
+            background-size: 300% 300%;
+            animation: gradientMove 3s ease infinite;
+        }
+
+        /* Wave Background Effect */
+        .wave-bg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, rgba(245, 158, 11, 0.1), rgba(59, 130, 246, 0.1));
+            animation: wave 15s ease-in-out infinite;
+        }
+
+        /* Morphing Shapes */
+        .morph-shape {
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        /* Glow Effects */
+        .glow-on-hover {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glow-on-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .glow-on-hover:hover::before {
+            left: 100%;
+        }
+
+        /* Logo Animation */
+        .logo-tilt:hover {
+            animation: float 0.6s ease-in-out;
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .card-enhanced:hover {
+                transform: translateY(-8px) scale(1.01);
+            }
+            .floating-element {
+                animation-duration: 15s;
+            }
+        }
+
+        /* Particle System */
+        .particle {
+            position: absolute;
+            background: #f59e0b;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particleFloat 20s linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Message Card Specific Styles */
+        .message-card {
+            position: relative;
+            z-index: 2;
+        }
+
+        .quote-mark {
+            font-size: 4rem;
+            line-height: 1;
+            opacity: 0.08;
+            font-family: Georgia, serif;
+            position: absolute;
+            z-index: 0;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #f59e0b, #f97316);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #d97706, #ea580c);
+        }
+    </style>
+</head>
+<body class="font-inter bg-animated text-gray-800 overflow-x-hidden">
+    
+    <!-- Ultra Enhanced Animated Background -->
+    <div class="floating-elements">
+        <!-- Large Pulsating Orbs with Complex Animations -->
+        <div class="floating-element w-40 h-40 bg-gradient-to-r from-secondary/30 to-orange-500/30 rounded-full blur-2xl animate-pulse-slow morph-shape" 
+             style="top:8%; left:12%; animation-delay:0s"></div>
+        <div class="floating-element w-60 h-60 bg-gradient-to-r from-accent/25 to-blue-600/25 rounded-full blur-3xl animate-pulse-slow morph-shape" 
+             style="top:15%; right:10%; animation-delay:1.5s"></div>
+        <div class="floating-element w-32 h-32 bg-gradient-to-r from-purple-500/25 to-pink-500/25 rounded-full blur-xl animate-bounce-slow morph-shape" 
+             style="bottom:20%; left:25%; animation-delay:3s"></div>
+        <div class="floating-element w-48 h-48 bg-gradient-to-r from-green-400/25 to-teal-500/25 rounded-full blur-2xl animate-pulse-slow morph-shape" 
+             style="bottom:5%; right:15%; animation-delay:2s"></div>
+
+        <!-- Geometric Shapes with Enhanced Animation -->
+        <div class="floating-element w-24 h-24 bg-secondary/15 rotate-45 animate-spin-slow morph-shape" 
+             style="top:50%; left:8%; animation-delay:4s"></div>
+        <div class="floating-element w-20 h-20 bg-accent/15 rotate-12 animate-spin-slow morph-shape" 
+             style="top:35%; right:20%; animation-delay:2.5s"></div>
+        <div class="floating-element w-28 h-28 bg-purple-400/15 -rotate-45 animate-spin-slow morph-shape" 
+             style="bottom:40%; left:60%; animation-delay:1.8s"></div>
+
+        <!-- Educational Themed Elements -->
+        <div class="floating-element w-16 h-10 bg-gradient-to-r from-secondary/40 to-orange-400/40 rotate-12 rounded-lg shadow-2xl morph-shape" 
+             style="top:25%; left:70%; animation-delay:3.5s"></div>
+        <div class="floating-element w-12 h-8 bg-gradient-to-r from-accent/40 to-blue-500/40 -rotate-6 rounded-lg shadow-2xl morph-shape" 
+             style="top:65%; left:45%; animation-delay:5s"></div>
+        <div class="floating-element w-18 h-12 bg-gradient-to-r from-purple-400/40 to-pink-400/40 rotate-3 rounded-lg shadow-2xl morph-shape" 
+             style="bottom:30%; right:40%; animation-delay:2.8s"></div>
+
+        <!-- Sparkle Effects with Various Sizes -->
+        <div class="floating-element w-3 h-3 bg-secondary rounded-full animate-ping" 
+             style="top:20%; left:40%; animation-delay:1s"></div>
+        <div class="floating-element w-4 h-4 bg-accent rounded-full animate-ping" 
+             style="top:75%; right:55%; animation-delay:3.2s"></div>
+        <div class="floating-element w-2 h-2 bg-purple-500 rounded-full animate-ping" 
+             style="bottom:50%; left:80%; animation-delay:4.7s"></div>
+        <div class="floating-element w-5 h-5 bg-pink-500 rounded-full animate-ping" 
+             style="top:40%; right:75%; animation-delay:6s"></div>
+
+        <!-- Additional Decorative Elements -->
+        <div class="floating-element w-36 h-36 border-2 border-secondary/20 rounded-full animate-spin-slow" 
+             style="top:60%; left:5%; animation-delay:7s"></div>
+        <div class="floating-element w-44 h-44 border border-accent/15 rounded-full animate-spin-slow" 
+             style="bottom:60%; right:5%; animation-delay:8.5s"></div>
+
+        <!-- Wave Background -->
+        <div class="wave-bg"></div>
+    </div>
+
+    <!-- Enhanced Navigation with Your Provided Code -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500">
+        <div class="bg-white/95 backdrop-blur-md shadow-lg mx-4 mt-4 mb-4 rounded-2xl border border-gray-200/50">
+            <div class="max-w-7xl mx-auto px-6 py-4">
+                <div class="flex justify-between items-center">
+     <!-- Logo -->
+             <!-- Logo -->
+                    <a href="index.html" class="flex items-center space-x-3 group">
+                        <div id="site-logo" class="relative logo-tilt">
+                            <img src="logo.png" alt="Gyan Niketan" class="h-12 w-12 rounded-xl object-cover shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-r from-secondary to-orange-500 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold gradient-text">Gyan Niketan</h1>
+                            <p class="text-xs text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">सत्वात संजायते ज्ञानम्</p>
+                        </div>
+                    </a>
+                   
+                    <ul class="hidden lg:flex space-x-8 items-center">
+                        <li><a href="index.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Home</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="about.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">About</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                       
+                        <li><a href="academics.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Academics</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="admissions.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Admissions</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="alumni.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Alumni</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="contact.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Contact</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                              <li class="relative group">
+                            <a href="#" class="nav-link relative" id="more-link" aria-haspopup="true" aria-expanded="false">
+                                <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">More</span>
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <ul class="absolute right-0 mt-3 w-56 bg-white/95 backdrop-blur-md shadow-xl rounded-xl border border-gray-200/70 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                                <li>
+                                    <a href="https://www.cbse.gov.in/"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary rounded-t-xl">CBSE</a>
+                                </li>
+                                <li>
+                                    <a href="https://ncert.nic.in/" target="_blank" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">NCERT</a>
+                                </li>
+                                 <li>
+                                    <a href="developers.html" target="_blank" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Developers</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="career.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Career</a>
+                                </li>
+                                 <li>
+                                    <a href="council.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Council</a>
+                                </li>
+                                  <li>
+                                    <a href="activities.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Activity</a>
+                                </li>
+                                <li>
+                                    <a href="hostel.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Hostel Life</a>
+                                </li>
+                                <li>
+                                    <a href="mandatorydisclosure.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary rounded-b-xl">Mandatory Disclosure</a>
+                                </li>
+                                 <li>
+                                    <a href="Pedagogical Planner.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary rounded-b-xl">Pedagogical Planner</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li>
+                            <a href="https://student.schoolcanvas.com/" target="_blank" rel="noopener noreferrer">
+                                <button class="bg-gradient-to-r from-secondary to-orange-500 text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 glow-on-hover">
+                                    Student Login
+                                </button>
+                            </a>
+                           
+                           
+                        </li>
+                    </ul>
+                   
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="lg:hidden flex flex-col space-y-1 p-2 group">
+                        <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 group-hover:bg-secondary"></span>
+                        <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 group-hover:bg-secondary"></span>
+                        <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 group-hover:bg-secondary"></span>
+                    </button>
+                </div>
+               
+                <!-- Mobile Menu -->
+                <ul id="nav-menu" class="lg:hidden hidden mt-4 space-y-4 border-t border-gray-200 pt-4 transition-all duration-300">
+                    <li><a href="index.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Home</a></li>
+                    <li><a href="about.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">About</a></li>
+                    <li><a href="facilities.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Facilities</a></li>
+                    <li><a href="admissions.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Admissions</a></li>
+                    <li><a href="alumni.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Alumni</a></li>
+                    <li><a href="contact.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Contact</a></li>
+                     <li>
+                        <a href="#" id="mobile-more-link" class="flex items-center justify-between text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">
+                            <span>More</span>
+                            <span class="material-symbols-rounded text-base">expand_more</span>
+                        </a>
+                        <ul id="mobile-more-submenu" class="hidden mt-1 ml-2 space-y-1">
+                            <li><a href="https://www.cbse.gov.in/"target="_blank"  class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">CBSE</a></li>
+                            <li><a href="https://ncert.nic.in/" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">NCERT</a></li>
+                         <li><a href="developers.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Developers</a></li>
+                            <li><a href="career.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Career</a></li>
+                        <li><a href="council.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Council</a></li>
+                        <li><a href="activities.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Activity</a></li>
+                        <li><a href="hostel.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Hostel Life</a></li>
+
+                            <li><a href="mandatorydisclosure.html"  class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Mandatory Disclosure</a></li>
+                               <li><a href="Pedagogical Planner.html"  class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Pedagogical Planner</a></li>
+                        </ul>
+                    </li>
+                   
+                    <li class="pt-2">
+                        <a href="https://student.schoolcanvas.com/" target="_blank" rel="noopener noreferrer">
+                            <button class="bg-gradient-to-r from-secondary to-orange-500 text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 glow-on-hover">
+                                Student Login
+                            </button>
+                        </a>
+                       
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sub Navigation Bar -->
+    <nav id="sub-navbar" class="fixed top-24 w-full z-40 transition-all duration-500 bg-white/5 backdrop-blur-lg hidden opacity-0 transform -translate-y-4">
+        <div class="max-w-7xl mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Quick Links -->
+                <div class="hidden lg:flex space-x-6 items-center">
+                    <a href="about.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-info-circle text-xs"></i>
+                        <span>About Us</span>
+                    </a>
+                    <a href="vision.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-eye text-xs"></i>
+                        <span>Vision</span>
+                    </a>
+                    <a href="news.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-newspaper text-xs"></i>
+                        <span>News & Events</span>
+                    </a>
+                    <a href="Academics Calendar.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-calendar-alt text-xs"></i>
+                        <span>Academic Calendar</span>
+                    </a>
+                    <a href="facilities.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-building text-xs"></i>
+                        <span>Facilities</span>
+                    </a>
+                    <a href="faculty.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-chalkboard-teacher text-xs"></i>
+                        <span>Faculty</span>
+                    </a>
+                    <a href="deskmessages.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-comments text-xs"></i>
+                        <span>Desk Messages</span>
+                    </a>
+                    <a href="gallery.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-images text-xs"></i>
+                        <span>Gallery</span>
+                    </a>
+                    
+                </div>
+
+             
+
+            <!-- Mobile Sub Menu -->
+            <div class="lg:hidden mt-3 pt-3 border-t border-white/20">
+                <div class="flex flex-wrap gap-2">
+                    <a href="about.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-info-circle mr-1"></i>About Us
+                    </a>
+                    <a href="vision.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-eye mr-1"></i>Vision
+                    </a>
+                    <a href="news.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-newspaper mr-1"></i>News & Events
+                    </a>
+                    <a href="Academics Calendar.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-calendar-alt mr-1"></i>Calendar
+                    </a>
+                    <a href="facilities.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-building mr-1"></i>Facilities
+                    </a>
+                    <a href="faculty.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-chalkboard-teacher mr-1"></i>Faculty
+                    </a>
+                    <a href="deskmessages.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-comments mr-1"></i>Desk Messages
+                    </a>
+                    <a href="gallery.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-images mr-1"></i>Gallery
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Enhanced Page Header -->
+    <div class="relative z-10 pt-40 pb-20">
+        <div class="max-w-6xl mx-auto text-center px-6">
+            <div class="inline-block mb-6">
+                <span class="text-secondary text-sm font-bold uppercase tracking-wider px-6 py-3 rounded-full bg-secondary/10 backdrop-blur-lg border border-secondary/20 animate-shimmer">
+                    Leadership Messages
+                </span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-gray-900 mb-8 animate-fade-in">
+                From Our <span class="gradient-text">Desk</span>
+            </h1>
+            <p class="text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed animate-fade-in font-medium">
+                Inspiring words from our educational leaders who guide and shape the future of 
+                <span class="gradient-text font-bold">Gyan Niketan</span>
+            </p>
+            <div class="mt-8 flex justify-center">
+                <div class="w-24 h-1 bg-gradient-to-r from-secondary via-orange-500 to-red-500 rounded-full animate-shimmer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Messages Grid -->
+    <main class="relative z-10 pb-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="space-y-16">
+                
+                <!-- Founder's Message -->
+                <div class="glass-morphism rounded-3xl p-8 md:p-16 card-enhanced message-card shadow-2xl">
+                    <div class="quote-mark text-secondary -top-8 -left-8">"</div>
+                    <div class="flex flex-col lg:flex-row gap-12 items-center">
+                        <div class="relative flex-shrink-0">
+                            <div class="w-48 h-48 lg:w-56 lg:h-56 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50 transform hover:scale-105 transition-transform duration-500">
+                                <img src="founder of gyan niketan.jpg" alt="Founder" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-secondary/30 via-transparent to-transparent"></div>
+                            </div>
+                            <div class="absolute -top-4 -right-4 w-12 h-12 bg-secondary rounded-full flex items-center justify-center shadow-xl">
+                                <i class="fas fa-crown text-white text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="flex-1 text-center lg:text-left">
+                            <div class="inline-flex items-center mb-4 px-4 py-2 rounded-full bg-secondary/10 border border-secondary/20">
+                                <i class="fas fa-star text-secondary mr-2"></i>
+                                <span class="text-sm uppercase tracking-widest text-secondary font-bold">Founder's Message</span>
+                            </div>
+                            <h2 class="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
+                                [Padma Shree Acharya Kishore Kunal]
+                            </h2>
+                            <div class="prose prose-xl max-w-none">
+                                <p class="text-gray-700 leading-relaxed text-xl font-medium mb-6">
+                                    "Education is not just about acquiring knowledge; it's about transforming lives and building character. At Gyan Niketan, we believe in nurturing not just academic excellence, but also moral values, leadership qualities, and social responsibility."
+                                </p>
+                            </div>
+                            <div class="flex items-center justify-center lg:justify-start text-gray-500 mt-8">
+                                <i class="fas fa-quote-left text-secondary mr-3 text-lg"></i>
+                                <span class="font-semibold">Founder & Visionary Leader</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Administrator's Message -->
+<div class="glass-morphism rounded-3xl p-8 md:p-16 card-enhanced message-card shadow-2xl mt-10">
+  <div class="quote-mark text-secondary -top-8 -left-8">"</div>
+  <div class="flex flex-col lg:flex-row gap-12 items-center">
+    <div class="relative flex-shrink-0">
+      <div class="w-48 h-48 lg:w-56 lg:h-56 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50 transform hover:scale-105 transition-transform duration-500">
+        <img src="Anita Kunal.jpg" alt="Administrator" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-secondary/30 via-transparent to-transparent"></div>
+      </div>
+      <div class="absolute -top-4 -right-4 w-12 h-12 bg-secondary rounded-full flex items-center justify-center shadow-xl">
+        <i class="fas fa-user-tie text-white text-lg"></i>
+      </div>
+    </div>
+    <div class="flex-1 text-center lg:text-left">
+      <div class="inline-flex items-center mb-4 px-4 py-2 rounded-full bg-secondary/10 border border-secondary/20">
+        <i class="fas fa-star text-secondary mr-2"></i>
+        <span class="text-sm uppercase tracking-widest text-secondary font-bold">Administrator's Desk</span>
+      </div>
+      <h2 class="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
+        [Mrs. Anita Kunal]
+      </h2>
+      <div class="prose prose-xl max-w-none">
+        <p class="text-gray-700 leading-relaxed text-xl font-medium mb-6">
+          "It is a matter of great pride and pleasure that Gyan Niketan School making great strides and touching the pinnacle of glory not only in academics but all spheres of life proving true to the real spirit and aim of education. The success owes to the dedicated efforts of all the staff members and an optimistic attitude. The stress on all round development coupled with no dearth of much reach such heights and prepare on discipline and morality has formed the basis and guideline for the pupil’s pursuit of education. We are determined to more ached and add new feathers to our success in every forthcoming session."
+        </p>
+      </div>
+      <div class="flex items-center justify-center lg:justify-start text-gray-500 mt-8">
+        <i class="fas fa-quote-left text-secondary mr-3 text-lg"></i>
+        <span class="font-semibold">Administrator</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+                <!-- Director's Message -->
+                <div class="glass-morphism rounded-3xl p-8 md:p-16 card-enhanced message-card shadow-2xl">
+                    <div class="quote-mark text-accent -top-8 -right-8">"</div>
+                    <div class="flex flex-col lg:flex-row-reverse gap-12 items-center">
+                        <div class="relative flex-shrink-0">
+                            <div class="w-48 h-48 lg:w-56 lg:h-56 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50 transform hover:scale-105 transition-transform duration-500">
+                                <img src="director.jpg" alt="Director" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-accent/30 via-transparent to-transparent"></div>
+                            </div>
+                            <div class="absolute -top-4 -left-4 w-12 h-12 bg-accent rounded-full flex items-center justify-center shadow-xl">
+                                <i class="fas fa-graduation-cap text-white text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="flex-1 text-center lg:text-right">
+                            <div class="inline-flex items-center mb-4 px-4 py-2 rounded-full bg-accent/10 border border-accent/20">
+                                <i class="fas fa-compass text-accent mr-2"></i>
+                                <span class="text-sm uppercase tracking-widest text-accent font-bold">Director's Message</span>
+                            </div>
+                            <h2 class="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
+                                [Mr. Sayan Kunal]
+                            </h2>
+                            <div class="prose prose-xl max-w-none">
+                                <p class="text-gray-700 leading-relaxed text-xl font-medium mb-6">
+                                   "As Education is the process of acquiring knowledge, skills and values that enable individuals to grow, develop and reach their full potential, Gyan Niketan, with its vast experience of shaping the legacy of education is committed to providing a nurturing environment that fosters academic excellence, creativity and personal growth."
+                                </p>
+                            </div>
+                            <div class="flex items-center justify-center lg:justify-end text-gray-500 mt-8">
+                                <span class="font-semibold">Academic Director</span>
+                                <i class="fas fa-graduation-cap text-accent ml-3 text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Principal's Message -->
+                <div class="glass-morphism rounded-3xl p-8 md:p-16 card-enhanced message-card shadow-2xl">
+                    <div class="quote-mark text-purple-500 -top-8 -left-8">"</div>
+                    <div class="flex flex-col lg:flex-row gap-12 items-center">
+                        <div class="relative flex-shrink-0">
+                            <div class="w-48 h-48 lg:w-56 lg:h-56 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50 transform hover:scale-105 transition-transform duration-500">
+                                <img src="principal.jpg" alt="Principal" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-purple-500/30 via-transparent to-transparent"></div>
+                            </div>
+                            <div class="absolute -top-4 -right-4 w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center shadow-xl">
+                                <i class="fas fa-chalkboard-teacher text-white text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="flex-1 text-center lg:text-left">
+                            <div class="inline-flex items-center mb-4 px-4 py-2 rounded-full bg-purple-100 border border-purple-200">
+                                <i class="fas fa-school text-purple-600 mr-2"></i>
+                                <span class="text-sm uppercase tracking-widest text-purple-600 font-bold">Principal's Message</span>
+                            </div>
+                            <h2 class="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
+                                [Mr. Shailendra Mohan Jha]
+                            </h2>
+                           <div class="prose prose-xl max-w-none">
+  <p class="text-gray-700 leading-relaxed text-xl font-medium mb-6">
+    "Education is something which makes man self-reliant and selfless” this statement of the Rig Veda was the guiding principles behind establishment of this school in the year 1986. 
+    Being principal of Gyan Niketan, I feel proud and privileged to welcome and extend our warm greetings to all those who visit our website. 
+    Gyan Niketan is an institution where we are committed to fostering a safe, supportive, and academically challenging environment where every student is encouraged to grow, explore, and thrive. Our school is a learning abode where we provide contemporary education while preserving the legacy of our rich culture and heritage.
+    This website is a window through which we keep you connected and informed about the curricular and co-curricular activities of the school.
+    <br><br>
+    <span class="relative inline-block px-4 py-2 font-semibold text-gray-900 rounded-xl bg-white/50 backdrop-blur-lg border border-white/30">
+      This is important to mention here that this website has been designed and developed by the students of Std. X of our school — 
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 via-orange-400 to-red-500 font-extrabold">
+        Udit, Aryan, Anant, and Aadyant
+      </span> 
+    </span>
+  </p>
+</div>
+
+                            <div class="flex items-center justify-center lg:justify-start text-gray-500 mt-8">
+                                <i class="fas fa-chalkboard-teacher text-purple-500 mr-3 text-lg"></i>
+                                <span class="font-semibold">School Principal</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+              
+
+                <!-- Head Boy's Message -->
+                <div class="glass-morphism rounded-3xl p-8 md:p-16 card-enhanced message-card shadow-2xl">
+                    <div class="quote-mark text-red-500 -top-8 -left-8">"</div>
+                    <div class="flex flex-col lg:flex-row gap-12 items-center">
+                        <div class="relative flex-shrink-0">
+                            <div class="w-48 h-48 lg:w-56 lg:h-56 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50 transform hover:scale-105 transition-transform duration-500">
+                                <img src="headboy.webp" alt="Head Boy" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-red-500/30 via-transparent to-transparent"></div>
+                            </div>
+                            <div class="absolute -top-4 -right-4 w-12 h-12 bg-red-500 rounded-full flex items-center justify-center shadow-xl">
+                                <i class="fas fa-star text-white text-lg"></i>
+                            </div>
+                        </div>
+                        <div class="flex-1 text-center lg:text-left">
+                            <div class="inline-flex items-center mb-4 px-4 py-2 rounded-full bg-red-100 border border-red-200">
+                                <i class="fas fa-medal text-red-600 mr-2"></i>
+                                <span class="text-sm uppercase tracking-widest text-red-600 font-bold">Head Boy's Message</span>
+                            </div>
+                            <h2 class="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
+                                [Mayank Kumar]
+                            </h2>
+                            <div class="prose prose-xl max-w-none">
+                                <p class="text-gray-700 leading-relaxed text-xl font-medium mb-6">
+                               "To my fellow students: I stand with you and for you.
+Whether it's your academic goals, your creative ideas,
+or your concerns—you matter. My role is to listen, to
+support, and to make sure your voices are heard.
+Together, we will work to make this year not just
+successful, but unforgettable.
+"
+                                </p>
+                            </div>
+                            <div class="flex items-center justify-center lg:justify-start text-gray-500 mt-8">
+                                <i class="fas fa-star text-red-500 mr-3 text-lg"></i>
+                                <span class="font-semibold">Head Boy & Student Leader</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+   
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16 relative mt-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold gradient-text mb-6">Gyan Niketan</h3>
+                    <p class="text-gray-300 leading-relaxed mb-6">To serve a very lagging and visible need of the city and its surrounding with an institution which, besides giving the children the best education, cares for all round development physical, mental and spiritual and inculcates in them a deep love for high moral values and due respect for all religion.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/gyanniketanpatna/" target="_blank"class="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center hover:bg-secondary hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-facebook-f text-white"></i>
+                        </a>
+                       
+                        <a href="https://www.instagram.com/apna_gyan_niketan/?hl=en"target="_blank" class="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center hover:bg-secondary hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-instagram text-white"></i>
+                        </a>
+                       
+                    </div>
+                </div>
+               
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="about.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">About Us</a></li>
+                        <li><a href="facilities.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Facilities</a></li>
+                        <li><a href="admissions.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Admissions</a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Contact</a></li>
+                         
+                    </ul>
+                </div>
+               
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Academics</h3>
+                    <ul class="space-y-3">
+                        <li><a href="academics.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Primary School</a></li>
+                        <li><a href="academics.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Middle School</a></li>
+                        <li><a href="academics.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">High School</a></li>
+                        <li><a href="academics.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Extra Curricular</a></li>
+                    </ul>
+                </div>
+               
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Contact Info</h3>
+                    <div class="space-y-3 text-gray-300">
+                        <p class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-3 text-secondary"></i>
+                            Vitthal Complex, Ranjan path,Gola Road
+(Danapur Cantt.), Patna – 801503.
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-phone mr-3 text-secondary"></i>
+                            06115 – 235117, 235525
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-secondary"></i>
+                            gnspatna@rediffmail.com
+                        </p>
+                    </div>
+                </div>
+            </div>
+           
+            <!-- Mobile App Download Section -->
+            <div class="border-t border-white/20 pt-8 mb-8">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold text-white mb-4">Download Our Mobile App</h3>
+                    <p class="text-gray-300 mb-6">Stay connected with Gyan Niketan on the go! Download our official mobile app for easy access to school updates, notifications, and more.</p>
+                    <a href="https://play.google.com/store/apps/details?id=parentsalarm.gyan.niketan.group.of.schools.patna.bihar&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg">
+                        <svg class="w-8 h-8 mr-3" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                        </svg>
+                        <div class="text-left">
+                            <div class="text-xs text-gray-600">GET IT ON</div>
+                            <div class="text-sm font-semibold">Google Play</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+           
+            <div class="border-t border-white/20 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 Gyan Niketan. All rights reserved. | Excellence in Education</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+   // Enhanced Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.style.transform = 'translateY(0)';
+                navbar.style.opacity = '0.95';
+                navbar.querySelector('.bg-white\\/95').classList.add('shadow-xl');
+            } else {
+                navbar.style.transform = 'translateY(0)';
+                navbar.style.opacity = '1';
+                navbar.querySelector('.bg-white\\/95').classList.remove('shadow-xl');
+            }
+        });
+
+        // Enhanced hover effects for navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+           
+            link.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Sub navbar functionality - show/hide on About click
+        const subNavbar = document.getElementById('sub-navbar');
+        const aboutLink = document.querySelector('a[href="about.html"]');
+       
+        aboutLink.addEventListener('click', function(e) {
+            e.preventDefault();
+           
+            if (subNavbar.classList.contains('hidden')) {
+                // Show sub navbar
+                subNavbar.classList.remove('hidden');
+                setTimeout(() => {
+                    subNavbar.style.opacity = '1';
+                    subNavbar.style.transform = 'translateY(0)';
+                }, 10);
+            } else {
+                // Hide sub navbar
+                subNavbar.style.opacity = '0';
+                subNavbar.style.transform = 'translateY(-4px)';
+                setTimeout(() => {
+                    subNavbar.classList.add('hidden');
+                }, 300);
+            }
+        });
+
+        // Hide sub navbar when clicking on other nav links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            if (link.getAttribute('href') !== 'about.html') {
+                link.addEventListener('click', function() {
+                    subNavbar.style.opacity = '0';
+                    subNavbar.style.transform = 'translateY(-4px)';
+                    setTimeout(() => {
+                        subNavbar.classList.add('hidden');
+                    }, 300);
+                });
+            }
+        });
+
+        // Enhanced mobile menu with slide animation
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        const mobileMoreLink = document.getElementById('mobile-more-link');
+        const mobileMoreSubmenu = document.getElementById('mobile-more-submenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+           
+            if (navMenu.classList.contains('hidden')) {
+                navMenu.classList.remove('hidden');
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    navMenu.style.opacity = '1';
+                    navMenu.style.transform = 'translateY(0)';
+                }, 10);
+            } else {
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    navMenu.classList.add('hidden');
+                }, 300);
+            }
+           
+            // Animate hamburger menu
+            const spans = mobileMenuBtn.querySelectorAll('span');
+            if (mobileMenuBtn.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        // Mobile: toggle More submenu
+        if (mobileMoreLink && mobileMoreSubmenu) {
+            mobileMoreLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                mobileMoreSubmenu.classList.toggle('hidden');
+                const icon = mobileMoreLink.querySelector('.material-symbols-rounded');
+                if (icon) {
+                    icon.textContent = mobileMoreSubmenu.classList.contains('hidden') ? 'expand_more' : 'expand_less';
+                }
+            });
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                // Special handling for About link in mobile menu
+                if (link.getAttribute('href') === 'about.html') {
+                    // Don't close mobile menu for About link, let it handle sub navbar
+                    return;
+                }
+                // Keep menu open when toggling More submenu
+                if (link.id === 'mobile-more-link') {
+                    return;
+                }
+               
+                mobileMenuBtn.classList.remove('active');
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    navMenu.classList.add('hidden');
+                }, 300);
+               
+                // Reset hamburger menu
+                const spans = mobileMenuBtn.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+               
+                // Hide sub navbar when clicking other links
+                subNavbar.style.opacity = '0';
+                subNavbar.style.transform = 'translateY(-4px)';
+                setTimeout(() => {
+                    subNavbar.classList.add('hidden');
+                }, 300);
+            });
+        });
+
+        // Handle About link in mobile menu
+        const mobileAboutLink = document.querySelector('#nav-menu a[href="about.html"]');
+        if (mobileAboutLink) {
+            mobileAboutLink.addEventListener('click', function(e) {
+                e.preventDefault();
+               
+                // Close the main mobile menu first
+                mobileMenuBtn.classList.remove('active');
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    navMenu.classList.add('hidden');
+                }, 300);
+               
+                // Reset hamburger menu
+                const spans = mobileMenuBtn.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+               
+                if (subNavbar.classList.contains('hidden')) {
+                    // Show sub navbar
+                    subNavbar.classList.remove('hidden');
+                    setTimeout(() => {
+                        subNavbar.style.opacity = '1';
+                        subNavbar.style.transform = 'translateY(0)';
+                    }, 10);
+                } else {
+                    // Hide sub navbar
+                    subNavbar.style.opacity = '0';
+                    subNavbar.style.transform = 'translateY(-4px)';
+                    setTimeout(() => {
+                        subNavbar.classList.add('hidden');
+                    }, 300);
+                }
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent);
+                const increment = target / 100;
+                let current = 0;
+               
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.ceil(current) + '+';
+                        setTimeout(updateCounter, 20);
+                    } else {
+                        counter.textContent = target + '+';
+                    }
+                };
+               
+                updateCounter();
+            });
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                   
+                    // Trigger counter animation for about section
+                    if (entry.target.id === 'about') {
+                        animateCounters();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for animations
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 0.8s ease-out';
+            observer.observe(section);
+        });
+
+        // Magnetic hover effect
+        document.querySelectorAll('.magnetic-hover').forEach(element => {
+            element.addEventListener('mousemove', (e) => {
+                const rect = element.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+               
+                element.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(1.05)`;
+            });
+           
+            element.addEventListener('mouseleave', () => {
+                element.style.transform = 'translate(0, 0) scale(1)';
+            });
+        });
+
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.floating-element');
+           
+            parallaxElements.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1);
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // 3D tilt interaction for logo
+        (function() {
+            const logo = document.getElementById('site-logo');
+            if (!logo) return;
+            const maxTilt = 12; // degrees
+            const scale = 1.04;
+            const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+            if (!isFinePointer) return; // skip on touch
+
+            const handleMove = (e) => {
+                const rect = logo.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const pctX = (x / rect.width) * 2 - 1; // -1 to 1
+                const pctY = (y / rect.height) * 2 - 1; // -1 to 1
+                const rotateY = pctX * maxTilt;
+                const rotateX = -pctY * maxTilt;
+                logo.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
+            };
+
+            const reset = () => {
+                logo.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+            };
+
+            logo.addEventListener('mousemove', handleMove);
+            logo.addEventListener('mouseleave', reset);
+        })();
+
+        // Video Modal Functionality
+        const videoModal = document.getElementById('video-modal');
+        const campusVideoBtn = document.getElementById('campus-video-btn');
+        const closeVideoModal = document.getElementById('close-video-modal');
+        const campusVideo = document.getElementById('campus-video');
+        const videoPlaceholder = document.getElementById('video-placeholder');
+
+        // Open video modal
+        campusVideoBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            videoModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+           
+            // Check if video file exists
+            const videoSrc = 'gns.mp4';
+            fetch(videoSrc, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        // Video file exists, show video player
+                        campusVideo.style.display = 'block';
+                        videoPlaceholder.style.display = 'none';
+                        campusVideo.src = videoSrc;
+                    } else {
+                        // Video file doesn't exist, show placeholder
+                        campusVideo.style.display = 'none';
+                        videoPlaceholder.style.display = 'flex';
+                    }
+                })
+                .catch(() => {
+                    // Error fetching video, show placeholder
+                    campusVideo.style.display = 'none';
+                    videoPlaceholder.style.display = 'flex';
+                });
+        });
+
+        // Close video modal
+        closeVideoModal.addEventListener('click', function() {
+            videoModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            // Pause video when closing
+            if (campusVideo.src) {
+                campusVideo.pause();
+            }
+        });
+
+        // Close modal when clicking outside
+        videoModal.addEventListener('click', function(e) {
+            if (e.target === videoModal) {
+                videoModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+                if (campusVideo.src) {
+                    campusVideo.pause();
+                }
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
+                videoModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+                if (campusVideo.src) {
+                    campusVideo.pause();
+                }
+            }
+        });
+    </script>
+   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const chatBody = document.querySelector(".chat-body");
+      let autoScrollEnabled = true; // default locked to bottom
+   
+      // Auto-scroll function
+      function autoScroll() {
+        if (autoScrollEnabled) {
+          chatBody.scrollTo({
+            top: chatBody.scrollHeight,
+            behavior: "smooth"
+          });
+        }
+      }
+   
+      // Detect if user scrolls away from bottom
+      chatBody.addEventListener("scroll", () => {
+        const atBottom =
+          chatBody.scrollHeight - chatBody.scrollTop <= chatBody.clientHeight + 10;
+        autoScrollEnabled = atBottom; // only enable if near bottom
+      });
+   
+      // Watch for new messages
+      const observer = new MutationObserver(autoScroll);
+      observer.observe(chatBody, { childList: true, subtree: true });
+   
+      // Scroll when chatbot is opened
+      document.querySelector("#chatbot-toggler").addEventListener("click", () => {
+        setTimeout(autoScroll, 100);
+      });
+    });
+    </script>
+   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const chatBody = document.querySelector(".chat-body");
+      let autoScrollEnabled = true; // default locked to bottom
+   
+      // Auto-scroll function
+      function autoScroll() {
+        if (autoScrollEnabled) {
+          chatBody.scrollTo({
+            top: chatBody.scrollHeight,
+            behavior: "smooth"
+          });
+        }
+      }
+   
+      // Detect if user scrolls away from bottom
+      chatBody.addEventListener("scroll", () => {
+        const atBottom =
+          chatBody.scrollHeight - chatBody.scrollTop <= chatBody.clientHeight + 10;
+        autoScrollEnabled = atBottom; // only enable if near bottom
+      });
+   
+      // Watch for new messages
+      const observer = new MutationObserver(autoScroll);
+      observer.observe(chatBody, { childList: true, subtree: true });
+   
+      // Scroll when chatbot is opened
+      document.querySelector("#chatbot-toggler").addEventListener("click", () => {
+        setTimeout(autoScroll, 100);
+      });
+    }); 
+    </script>
+    
+    </body>
+    </html>
