@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="nav.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+     <link href="logo.png" rel="icon">
+     <link rel="stylesheet" href="chat.css">
+      <script src="protect.js"></script>
+          <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#f59e0b',
+                        accent: '#3b82f6',
+                        glass: 'rgba(255, 255, 255, 0.1)',
+                        glassDark: 'rgba(15, 23, 42, 0.8)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-down': 'slideDown 0.8s ease-out',
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'scale-in': 'scaleIn 0.6s ease-out',
+                        'rotate-in': 'rotateIn 0.8s ease-out',
+                        'bounce-in': 'bounceIn 1s ease-out',
+                        'liquid': 'liquid 3s ease-in-out infinite',
+                        'shimmer': 'shimmer 2s linear infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    backdropBlur: {
+                        'xs': '2px',
+                    }
+                }
+            }
+        }
+    </script>
+  <title>Gyan Niketan School - CBSE Academic Calendar 2024-2026</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Inter", "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #333;
+      line-height: 1.6;
+    }
+    .header {
+      background: linear-gradient(135deg, #1976d2, #1565c0);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    .header-content {
+      position: relative;
+    }
+    .school-logo {
+      width: 80px; height: 80px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%; margin: 0 auto 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+    .header h1 { font-size: 2.7rem; font-weight: 800; margin-bottom: 10px; }
+    .header p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 20px; }
+    .academic-year {
+      background: rgba(255,255,255,0.2); display: inline-block; padding: 12px 25px;
+      border-radius: 25px; font-weight: 600; backdrop-filter: blur(10px);
+    }
+    .cbse-badge {
+      background: #ff6b35; color: white; padding: 5px 15px;
+      border-radius: 15px; font-size: 0.9rem; font-weight: 600; margin: 10px 5px;
+      display: inline-block;
+    }
+    .main-container {
+      max-width: 1400px; margin: 40px auto; padding: 0 20px;
+    }
+    .session-info {
+      background: white; border-radius: 15px; padding: 25px; margin-bottom: 30px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
+    }
+    .info-item { text-align: center; padding: 15px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid #1976d2; }
+    .info-label { font-size: 0.9rem; color: #666; font-weight: 600; margin-bottom: 5px; }
+    .info-value { font-size: 1.1rem; font-weight: 700; color: #1976d2; }
+    .calendar-layout { display: grid; grid-template-columns: 1fr 380px; gap: 30px; }
+    .calendar { background: white; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); overflow: hidden; }
+    .calendar-header {
+      background: linear-gradient(135deg, #1976d2, #1565c0);
+      color: white;
+      padding: 30px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .month-nav { display: flex; align-items: center; gap: 25px; }
+    .nav-btn {
+      background: rgba(255,255,255,0.2); border: none; color: white;
+      width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 1.3rem;
+      display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;
+    }
+    .nav-btn:hover { background: rgba(255,255,255,0.3); transform: scale(1.1); }
+    .current-month { font-size: 2rem; font-weight: 700; min-width: 220px; text-align: center; }
+    .today-info { text-align: right; font-size: 0.9rem; opacity: 0.9; }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-auto-rows: 130px;  /* Fixed height for all day cells */
+    }
+    .day-header { background: #f8f9fa; padding: 20px 5px; text-align: center; font-weight: 700; color: #666; border-bottom: 2px solid #e0e0e0; font-size: 0.9rem; }
+    .calendar-day {
+      height: 100%;
+      border: 1px solid #e0e0e0;
+      padding: 10px;
+      position: relative;
+      cursor: pointer;
+      background: white;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+    .calendar-day:hover {
+      background: #f0f8ff;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+    .calendar-day.other-month { background: #f8f9fa; color: #ccc; }
+    .calendar-day.today {
+      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+      border: 3px solid #1976d2;
+      font-weight: bold;
+      box-sizing: border-box;  /* Keep border from changing size */
+    }
+    .calendar-day.has-events {
+      border-left: 4px solid #1976d2;
+      box-sizing: border-box;  /* Keep border from changing size */
+    }
+    .calendar-day.sunday { background: #fff3e0; }
+    .day-number {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  color: #333;
+  flex: 0 0 auto;
+}
+    .day-events {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+}
+    .event { background: #1976d2; color: white; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; cursor: pointer; transition: all 0.3s ease; position: relative;}
+    .event:hover {
+  opacity: 0.9;
+}
+    .event.national-holiday { background: #f44336; }
+    .event.religious-holiday { background: #ff9800; }
+    .event.exam { background: #e91e63; }
+    .event.cultural { background: #9c27b0; }
+    .event.sports { background: #4caf50; }
+    .event.academic { background: #2196f3; }
+    .event.admission { background: #ff5722; }
+    .event.parent-meet { background: #795548; }
+    .event.cbse-important { background: #673ab7; }
+    .event.vacation { background: #04fa73; }
+    .sidebar { display: flex; flex-direction: column; gap: 25px; }
+    .cbse-dates, .upcoming-events, .legend {
+      background: white; border-radius: 15px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .cbse-dates h3 { color: #673ab7; margin-bottom: 20px; font-size: 1.2rem; font-weight: 700; }
+    .cbse-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
+    .cbse-item:last-child { border-bottom: none; }
+    .cbse-event { font-weight: 600; color: #333; }
+    .cbse-date { background: #673ab7; color: white; padding: 4px 12px; border-radius: 15px; font-size: 0.85rem; font-weight: 600; }
+    .upcoming-events h3 { color: #1976d2; margin-bottom: 20px; font-size: 1.1rem; font-weight: 700; }
+    .event-item { display: flex; align-items: flex-start; gap: 15px; padding: 15px 0; border-bottom: 1px solid #f0f0f0; transition: all 0.3s ease;}
+    .event-item:hover { background: #f8f9fa; margin: 0 -15px; padding: 15px; border-radius: 10px;}
+    .event-item:last-child { border-bottom: none; }
+    .event-date { background: #1976d2; color: white; padding: 10px 12px; border-radius: 10px; text-align: center; min-width: 55px; font-weight: 700; font-size: 0.9rem; }
+    .event-details h4 { font-size: 1.1rem; margin-bottom: 5px; color: #333; font-weight: 600; }
+    .event-details p { font-size: 0.9rem; color: #666; line-height: 1.3; }
+    .event-category { display: inline-block; background: #e3f2fd; color: #1976d2; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 600; margin-top: 5px; }
+    .legend h3 { color: #1976d2; margin-bottom: 20px; font-size: 1.1rem; font-weight: 700;}
+    .legend-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px;}
+    .legend-left { display: flex; align-items: center; gap: 12px;}
+    .legend-color { width: 20px; height: 20px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+    .modal.active { display: flex; animation: modalFadeIn 0.3s ease; }
+    @keyframes modalFadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    .modal-content { background: white; border-radius: 20px; padding: 35px; max-width: 500px; width: 90%; position: relative; box-shadow: 0 25px 80px rgba(0,0,0,0.3); animation: modalSlideUp 0.3s ease; }
+    @keyframes modalSlideUp { from { transform: translateY(50px); opacity: 0;} to { transform: translateY(0); opacity: 1; } }
+    .modal-close { position: absolute; top: 20px; right: 25px; background: #f0f0f0; border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; color: #666; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;}
+    .modal-close:hover { background: #e0e0e0; transform: scale(1.1);}
+    .modal h3 { color: #1976d2; margin-bottom: 15px; font-size: 1.3rem; font-weight: 700; }
+    .modal-date { background: #e3f2fd; padding: 12px 20px; border-radius: 10px; margin-bottom: 20px; font-weight: 600; color: #1976d2; border-left: 4px solid #1976d2; }
+    .modal-description { font-size: 1rem; line-height: 1.6; color: #555; margin-bottom: 20px; }
+    @media (max-width: 1024px) {
+      .calendar-layout { grid-template-columns: 1fr; gap: 20px;}
+      .sidebar { order: -1;}
+      .calendar-day { min-height: 90px;}
+    }
+    @media (max-width: 768px) {
+  .header h1 { font-size: 2.2rem; }
+  .calendar-header { flex-direction: column; gap: 20px; }
+  .calendar-day { min-height: 70px; font-size: 0.85rem; }
+  .session-info { grid-template-columns: 1fr; }
+ 
+  /* Add these lines to fix the mobile calendar issue */
+  .calendar {
+    overflow-x: auto;
+    min-width: 100%;
+  }
+  .calendar-grid {
+    grid-template-columns: repeat(7, 1fr) !important;
+    min-width: 700px; /* Minimum width to show all 7 days */
+    overflow-x: auto;
+  }
+  .calendar-day {
+    min-width: 90px; /* Ensure each day has minimum width */
+  }
+}
+
+/* Add this new media query for very small screens */
+@media (max-width: 480px) {
+  .calendar-grid {
+    min-width: 650px;
+  }
+  .calendar-day {
+    min-width: 85px;
+    font-size: 0.75rem;
+  }
+  .day-header {
+    font-size: 0.8rem;
+    padding: 15px 3px;
+  }
+}
+
+  </style>
+</head>
+<body>
+   
+        <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500">
+       
+        <div class="bg-white/95 backdrop-blur-md shadow-lg mx-4 mt-4 mb-4 rounded-2xl border border-gray-200/50">
+            <div class="max-w-7xl mx-auto px-6 py-4">
+                <div class="flex justify-between items-center">
+           <!-- Logo -->
+     <!-- Logo -->
+                    <a href="index.html" class="flex items-center space-x-3 group">
+                        <div id="site-logo" class="relative logo-tilt">
+                            <img src="logo.png" alt="Gyan Niketan" class="h-12 w-12 rounded-xl object-cover shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-r from-secondary to-orange-500 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold gradient-text">Gyan Niketan</h1>
+                            <p class="text-xs text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">सत्वात संजायते ज्ञानम्</p>
+                        </div>
+                    </a>
+                   
+                    <ul class="hidden lg:flex space-x-8 items-center">
+                        <li><a href="index.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Home</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="about.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">About</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                       
+                        <li><a href="academics.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Academics</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="admissions.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Admissions</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="alumni.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Alumni</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="contact.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Contact</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                              <li class="relative group">
+                            <a href="#" class="nav-link relative" id="more-link" aria-haspopup="true" aria-expanded="false">
+                                <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">More</span>
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <ul class="absolute right-0 mt-3 w-56 bg-white/95 backdrop-blur-md shadow-xl rounded-xl border border-gray-200/70 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                                <li>
+                                    <a href="https://www.cbse.gov.in/"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary rounded-t-xl">CBSE</a>
+                                </li>
+                                <li>
+                                    <a href="https://ncert.nic.in/" target="_blank" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">NCERT</a>
+                                </li>
+                                 <li>
+                                    <a href="developers.html" target="_blank" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Developers</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="career.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Career</a>
+                                </li>
+                                 <li>
+                                    <a href="council.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Council</a>
+                                </li>
+                                  <li>
+                                    <a href="activities.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Activity</a>
+                                </li>
+                                <li>
+                                    <a href="hostel.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Hostel Life</a>
+                                </li>
+                                <li>
+                                    <a href="mandatorydisclosure.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary rounded-b-xl">Mandatory Disclosure</a>
+                                </li>
+                                 <li>
+                                    <a href="Pedagogical Planner.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary rounded-b-xl">Pedagogical Planner</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li>
+                            <a href="https://student.schoolcanvas.com/" target="_blank" rel="noopener noreferrer">
+                                <button class="bg-gradient-to-r from-secondary to-orange-500 text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 glow-on-hover">
+                                    Student Login
+                                </button>
+                            </a>
+                           
+                           
+                        </li>
+                    </ul>
+                   
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="lg:hidden flex flex-col space-y-1 p-2 group">
+                        <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 group-hover:bg-secondary"></span>
+                        <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 group-hover:bg-secondary"></span>
+                        <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 group-hover:bg-secondary"></span>
+                    </button>
+                </div>
+               
+                <!-- Mobile Menu -->
+                <ul id="nav-menu" class="lg:hidden hidden mt-4 space-y-4 border-t border-gray-200 pt-4 transition-all duration-300">
+                    <li><a href="index.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Home</a></li>
+                    <li><a href="about.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">About</a></li>
+                    <li><a href="facilities.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Facilities</a></li>
+                    <li><a href="admissions.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Admissions</a></li>
+                    <li><a href="alumni.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Alumni</a></li>
+                    <li><a href="contact.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Contact</a></li>
+                     <li>
+                        <a href="#" id="mobile-more-link" class="flex items-center justify-between text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">
+                            <span>More</span>
+                            <span class="material-symbols-rounded text-base">expand_more</span>
+                        </a>
+                        <ul id="mobile-more-submenu" class="hidden mt-1 ml-2 space-y-1">
+                            <li><a href="https://www.cbse.gov.in/"target="_blank"  class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">CBSE</a></li>
+                            <li><a href="https://ncert.nic.in/" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">NCERT</a></li>
+                         <li><a href="developers.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Developers</a></li>
+                            <li><a href="career.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Career</a></li>
+                        <li><a href="council.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Council</a></li>
+                        <li><a href="activities.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Activity</a></li>
+                        <li><a href="hostel.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Hostel Life</a></li>
+
+                            <li><a href="mandatorydisclosure.html"  class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Mandatory Disclosure</a></li>
+                               <li><a href="Pedagogical Planner.html"  class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Pedagogical Planner</a></li>
+                        </ul>
+                    </li>
+                   
+                    <li class="pt-2">
+                        <a href="https://student.schoolcanvas.com/" target="_blank" rel="noopener noreferrer">
+                            <button class="bg-gradient-to-r from-secondary to-orange-500 text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 glow-on-hover">
+                                Student Login
+                            </button>
+                        </a>
+                       
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sub Navigation Bar -->
+    <nav id="sub-navbar" class="fixed top-24 w-full z-40 transition-all duration-500 bg-white/5 backdrop-blur-lg hidden opacity-0 transform -translate-y-4">
+        <div class="max-w-7xl mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Quick Links -->
+                <div class="hidden lg:flex space-x-6 items-center">
+                    <a href="about.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-info-circle text-xs"></i>
+                        <span>About Us</span>
+                    </a>
+                    <a href="vision.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-eye text-xs"></i>
+                        <span>Vision</span>
+                    </a>
+                    <a href="news.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-newspaper text-xs"></i>
+                        <span>News & Events</span>
+                    </a>
+                    <a href="Academics Calendar.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-calendar-alt text-xs"></i>
+                        <span>Academic Calendar</span>
+                    </a>
+                    <a href="facilities.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-building text-xs"></i>
+                        <span>Facilities</span>
+                    </a>
+                    <a href="faculty.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-chalkboard-teacher text-xs"></i>
+                        <span>Faculty</span>
+                    </a>
+                    <a href="deskmessages.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-comments text-xs"></i>
+                        <span>Desk Messages</span>
+                    </a>
+                    <a href="gallery.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-images text-xs"></i>
+                        <span>Gallery</span>
+                    </a>
+                    
+                </div>
+
+             
+
+            <!-- Mobile Sub Menu -->
+            <div class="lg:hidden mt-3 pt-3 border-t border-white/20">
+                <div class="flex flex-wrap gap-2">
+                    <a href="about.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-info-circle mr-1"></i>About Us
+                    </a>
+                    <a href="vision.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-eye mr-1"></i>Vision
+                    </a>
+                    <a href="news.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-newspaper mr-1"></i>News & Events
+                    </a>
+                    <a href="Academics Calendar.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-calendar-alt mr-1"></i>Calendar
+                    </a>
+                    <a href="facilities.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-building mr-1"></i>Facilities
+                    </a>
+                    <a href="faculty.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-chalkboard-teacher mr-1"></i>Faculty
+                    </a>
+                    <a href="deskmessages.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-comments mr-1"></i>Desk Messages
+                    </a>
+                    <a href="gallery.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-images mr-1"></i>Gallery
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+    </div>
+    <br>
+    <br>
+    <br>
+
+  <header class="header">
+    <div class="header-content">
+      <h1>Gyan Niketan School</h1>
+      <p>CBSE Academic Calendar & Important Events</p>
+      <div class="academic-year">Academic Years 2025-26</div>
+      <div class="cbse-badge">CBSE Affiliated</div>
+      <div class="cbse-badge">School Code: 65009</div>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <div class="session-info">
+      <div class="info-item">
+        <div class="info-label">Session Start</div>
+        <div class="info-value">27th March 2025</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Session End</div>
+        <div class="info-value">31st March 2026</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Total Sessions</div>
+        <div class="info-value">39 Years</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Board Exams</div>
+        <div class="info-value">Feb-Mar 2026</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Annual Results</div>
+        <div class="info-value">March 2026</div>
+      </div>
+    </div>
+
+    <div class="calendar-layout">
+      <div class="calendar">
+        <div class="calendar-header">
+          <div class="month-nav">
+            <button class="nav-btn" onclick="previousMonth()">‹</button>
+            <div class="current-month" id="current-month">January 2024</div>
+            <button class="nav-btn" onclick="nextMonth()">›</button>
+          </div>
+          <div class="today-info">
+            <div>Today: <span id="today-date"></span></div>
+            <div>Day: <span id="academic-day">1/240</span></div>
+          </div>
+        </div>
+        <div class="calendar-grid" id="calendar-grid">
+          <div class="day-header">Sunday</div>
+          <div class="day-header">Monday</div>
+          <div class="day-header">Tuesday</div>
+          <div class="day-header">Wednesday</div>
+          <div class="day-header">Thursday</div>
+          <div class="day-header">Friday</div>
+          <div class="day-header">Saturday</div>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <div class="cbse-dates">
+          <h3>📋 CBSE Important Dates</h3>
+          <div class="cbse-item"><div class="cbse-event">Board Exam Application</div><div class="cbse-date">Sep 2025</div></div>
+          <div class="cbse-item"><div class="cbse-event">Pre-Board Exams</div><div class="cbse-date">Dec 2025, Jan 2026</div></div>
+          <div class="cbse-item"><div class="cbse-event">Class X Board Exams</div><div class="cbse-date">Feb 2026, March 2026</div></div>
+          <div class="cbse-item"><div class="cbse-event">Class XII Board Exams</div><div class="cbse-date">Feb 2026, March 2026</div></div>
+          <div class="cbse-item"><div class="cbse-event">Board Results</div><div class="cbse-date">May 2026, June 2026</div></div>
+        </div>
+
+        <div class="upcoming-events">
+          <h3>📅 Upcoming Events</h3>
+          <div id="upcoming-events-list"></div>
+        </div>
+
+        <div class="legend">
+          <h3>🎨 Event Categories</h3>
+          <div class="legend-item"><div class="legend-left"><div class="legend-color" style="background: #f44336;"></div><span>Holidays</span></div></div>
+          <div class="legend-item"><div class="legend-left"><div class="legend-color" style="background: #ff9800;"></div><span>Cultural & Religious Festivals</span></div></div>
+          <div class="legend-item"><div class="legend-left"><div class="legend-color" style="background: #e91e63;"></div><span>Examinations</span></div></div>
+          <div class="legend-item"><div class="legend-left"><div class="legend-color" style="background: #673ab7;"></div><span>CBSE Important</span></div></div>
+          
+          <div class="legend-item"><div class="legend-left"><div class="legend-color" style="background: #4caf50;"></div><span>Sports & Activities</span></div></div>
+          <div class="legend-item"><div class="legend-left"><div class="legend-color" style="background: #795548;"></div><span>Sundays Only</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="event-modal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <h3 id="modal-title">Event Details</h3>
+      <div id="modal-date" class="modal-date">Date</div>
+      <div id="modal-description" class="modal-description">Description</div>
+    </div>
+  </div>
+
+ <style>
+    .day {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .day:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+  </style>
+
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16 relative mt-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold gradient-text mb-6">Gyan Niketan</h3>
+                    <p class="text-gray-300 leading-relaxed mb-6">To serve a very lagging and visible need of the city and its surrounding with an institution which, besides giving the children the best education, cares for all round development physical, mental and spiritual and inculcates in them a deep love for high moral values and due respect for all religion.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/gyanniketanpatna/" target="_blank"class="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center hover:bg-secondary hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-facebook-f text-white"></i>
+                        </a>
+                       
+                        <a href="https://www.instagram.com/apna_gyan_niketan/?hl=en"target="_blank" class="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center hover:bg-secondary hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-instagram text-white"></i>
+                        </a>
+                       
+                    </div>
+                </div>
+               
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="about.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">About Us</a></li>
+                        <li><a href="facilities.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Facilities</a></li>
+                        <li><a href="admissions.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Admissions</a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Contact</a></li>
+                         
+                    </ul>
+                </div>
+               
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Academics</h3>
+                    <ul class="space-y-3">
+                        <li><a href="academics.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Primary School</a></li>
+                        <li><a href="academics.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Middle School</a></li>
+                        <li><a href="academics.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">High School</a></li>
+                        <li><a href="academics.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Extra Curricular</a></li>
+                    </ul>
+                </div>
+               
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Contact Info</h3>
+                    <div class="space-y-3 text-gray-300">
+                        <p class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-3 text-secondary"></i>
+                            Vitthal Complex, Ranjan path,Gola Road
+(Danapur Cantt.), Patna – 801503.
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-phone mr-3 text-secondary"></i>
+                            06115 – 235117, 235525
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-secondary"></i>
+                            gnspatna@rediffmail.com
+                        </p>
+                    </div>
+                </div>
+            </div>
+           
+            <!-- Mobile App Download Section -->
+            <div class="border-t border-white/20 pt-8 mb-8">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold text-white mb-4">Download Our Mobile App</h3>
+                    <p class="text-gray-300 mb-6">Stay connected with Gyan Niketan on the go! Download our official mobile app for easy access to school updates, notifications, and more.</p>
+                    <a href="https://play.google.com/store/apps/details?id=parentsalarm.gyan.niketan.group.of.schools.patna.bihar&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg">
+                        <svg class="w-8 h-8 mr-3" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                        </svg>
+                        <div class="text-left">
+                            <div class="text-xs text-gray-600">GET IT ON</div>
+                            <div class="text-sm font-semibold">Google Play</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+           
+            <div class="border-t border-white/20 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 Gyan Niketan. All rights reserved. | Excellence in Education</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot Toggler -->
+    <button id="chatbot-toggler">
+      <span class="material-symbols-rounded">mode_comment</span>
+      <span class="material-symbols-rounded">close</span>
+    </button>
+    <div class="chatbot-popup">
+      <!-- Chatbot Header -->
+      <div class="chat-header">
+        <div class="header-info">
+          <svg class="chatbot-logo" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 1024 1024">
+            <path
+              d="M738.3 287.6H285.7c-59 0-106.8 47.8-106.8 106.8v303.1c0 59 47.8 106.8 106.8 106.8h81.5v111.1c0 .7.8 1.1 1.4.7l166.9-110.6 41.8-.8h117.4l43.6-.4c59 0 106.8-47.8 106.8-106.8V394.5c0-59-47.8-106.9-106.8-106.9zM351.7 448.2c0-29.5 23.9-53.5 53.5-53.5s53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5-53.5-23.9-53.5-53.5zm157.9 267.1c-67.8 0-123.8-47.5-132.3-109h264.6c-8.6 61.5-64.5 109-132.3 109zm110-213.7c-29.5 0-53.5-23.9-53.5-53.5s23.9-53.5 53.5-53.5 53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5zM867.2 644.5V453.1h26.5c19.4 0 35.1 15.7 35.1 35.1v121.1c0 19.4-15.7 35.1-35.1 35.1h-26.5zM95.2 609.4V488.2c0-19.4 15.7-35.1 35.1-35.1h26.5v191.3h-26.5c-19.4 0-35.1-15.7-35.1-35.1zM561.5 149.6c0 23.4-15.6 43.3-36.9 49.7v44.9h-30v-44.9c-21.4-6.5-36.9-26.3-36.9-49.7 0-28.6 23.3-51.9 51.9-51.9s51.9 23.3 51.9 51.9z"
+            />
+          </svg>
+          <h2 class="logo-text">Gyanis AI</h2>
+        </div>
+        <button id="close-chatbot" class="material-symbols-rounded">keyboard_arrow_down</button>
+      </div>
+      <!-- Chatbot Body -->
+      <div class="chat-body">
+        <div class="message bot-message">
+          <svg class="bot-avatar" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 1024 1024">
+            <path
+              d="M738.3 287.6H285.7c-59 0-106.8 47.8-106.8 106.8v303.1c0 59 47.8 106.8 106.8 106.8h81.5v111.1c0 .7.8 1.1 1.4.7l166.9-110.6 41.8-.8h117.4l43.6-.4c59 0 106.8-47.8 106.8-106.8V394.5c0-59-47.8-106.9-106.8-106.9zM351.7 448.2c0-29.5 23.9-53.5 53.5-53.5s53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5-53.5-23.9-53.5-53.5zm157.9 267.1c-67.8 0-123.8-47.5-132.3-109h264.6c-8.6 61.5-64.5 109-132.3 109zm110-213.7c-29.5 0-53.5-23.9-53.5-53.5s23.9-53.5 53.5-53.5 53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5zM867.2 644.5V453.1h26.5c19.4 0 35.1 15.7 35.1 35.1v121.1c0 19.4-15.7 35.1-35.1 35.1h-26.5zM95.2 609.4V488.2c0-19.4 15.7-35.1 35.1-35.1h26.5v191.3h-26.5c-19.4 0-35.1-15.7-35.1-35.1zM561.5 149.6c0 23.4-15.6 43.3-36.9 49.7v44.9h-30v-44.9c-21.4-6.5-36.9-26.3-36.9-49.7 0-28.6 23.3-51.9 51.9-51.9s51.9 23.3 51.9 51.9z"
+            />
+          </svg>
+          <!-- prettier-ignore -->
+          <div class="message-text"> Hey there  <br /> How can I help you today? </div>
+        </div>
+      </div>
+      <!-- Chatbot Footer -->
+      <div class="chat-footer">
+        <form action="#" class="chat-form">
+          <textarea placeholder="Message..." class="message-input" required></textarea>
+          <div class="chat-controls">
+            <button type="button" id="emoji-picker" class="material-symbols-outlined">sentiment_satisfied</button>
+            <div class="file-upload-wrapper">
+              <input type="file" accept="image/*" id="file-input" hidden />
+              <img src="#" />
+              <button type="button" id="file-upload" class="material-symbols-rounded">attach_file</button>
+              <button type="button" id="file-cancel" class="material-symbols-rounded">close</button>
+            </div>
+            <button type="submit" id="send-message" class="material-symbols-rounded">arrow_upward</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Linking Emoji Mart script for emoji picker -->
+    <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
+    <!-- Linking custom script -->
+<script src="chat.js"></script>
+  <script>
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    let currentDate = new Date();
+    let currentMonth = currentDate.getMonth();
+    let currentYear = currentDate.getFullYear();
+
+    
+    const events = 
+      // 2025-26 events (see previous code listing above for 2024 events)
+      {
+  '2025-03-27': [
+    { title: 'New Academic Session 2025-26', type: 'academic', description: 'New academic year begins for all classes' }
+  ],
+
+  '2025-04-07': [
+    { title: 'Ram Navmi', type: 'religious-holiday', description: 'Festival observance' }
+  ],
+  '2025-04-07': [
+    { title: 'World Health Day', type: 'events', description: 'Health awareness day' }
+  ],
+  '2025-04-10': [
+    { title: 'Mahavir Jayanti', type: 'religious-holiday', description: 'Festival observance' }
+  ],
+  '2025-04-12': [
+    { title: 'Inter House English and Hindi Calligraphy Competition', type: 'events', description: 'Inter-house competition' }
+  ],
+  '2025-04-14': [
+    { title: 'Dr. B. R. Ambedkar Jayanti', type: 'national-holiday', description: 'Birth anniversary observance' }
+  ],
+  '2025-04-18': [
+    { title: 'World Heritage Day', type: 'events', description: 'Heritage awareness day' }
+  ],
+  '2025-04-19': [
+    { title: 'Inter House Painting & Poster Making Competition', type: 'events', description: 'Inter-house art competition' }
+  ],
+  '2025-04-22': [
+    { title: 'Earth Day', type: 'events', description: 'Environmental awareness day' }
+  ],
+  '2025-04-26': [
+    { title: 'Investiture Ceremony', type: 'events', description: 'Student leadership ceremony' }
+  ],
+
+  '2025-05-01': [
+    { title: 'International Labour Day', type: 'national-holiday', description: 'International Workers Day' }
+  ],
+  '2025-05-10': [
+    { title: 'Mother’s Day Celebration', type: 'events', description: 'Celebration program' }
+  ],
+  '2025-05-12': [
+    { title: 'Buddha Purnima', type: 'religious-holiday', description: 'Festival observance' }
+  ],
+  '2025-05-17': [
+    { title: 'Inter House Spell Bee Competition', type: 'events', description: 'Spelling competition' }
+  ],
+
+  '2025-06-05': [
+    { title: 'World Environment Day', type: 'events', description: 'Environmental awareness day' }
+  ],
+  '2025-06-07': [
+    { title: 'Eid-ul-Zoha', type: 'religious-holiday', description: 'Festival observance' }
+  ],
+  '2025-06-21': [
+    { title: 'International Yoga Day', type: 'events', description: 'Yoga awareness and activities' }
+  ],
+  '2025-06-26': [
+    { title: 'International Day Against Drug Abuse', type: 'events', description: 'Anti-drug awareness day' }
+  ],
+
+  '2025-06-28': [
+    { title: 'Inter House English Literary / Speech Competition', type: 'events', description: 'Inter-house competition' }
+  ],
+  '2025-07-05': [
+    { title: 'Inter House Eco Quiz / Speech / Skit Competition', type: 'events', description: 'Inter-house competition' }
+  ],
+  '2025-07-6': [
+    { title: 'Muharram', type: 'religious-holiday', description: 'Observance' }
+  ],
+  '2025-07-11': [
+    { title: 'World Population Day', type: 'events', description: 'Population awareness day' }
+  ],
+
+  '2025-07-12': [
+    { title: 'Inter House Quiz Competition (V–VIII)', type: 'events', description: 'Inter-house quiz, junior group' }
+  ],
+  '2025-07-19': [
+    { title: 'Inter House Quiz Competition (IX–XII)', type: 'events', description: 'Inter-house quiz, senior group' }
+  ],
+
+  '2025-08-02': [
+    { title: 'Inter House Patriotic Group Song Competition', type: 'events', description: 'Singing competition' }
+  ],
+  '2025-08-09': [
+    { title: 'Raksha Bandhan', type: 'religious-holiday', description: 'Festival observance' }
+  ],
+  '2025-08-15': [
+    { title: 'Independence Day Celebration', type: 'sports', description: 'National celebration' }
+  ],
+  '2025-08-23': [
+    { title: 'Inter House Sanskrit Recitation / Song / Stotram Competition', type: 'events', description: 'Inter-house competition' }
+  ],
+  '2025-08-29': [
+    { title: 'World Sports Day', type: 'sports', description: 'Sports day observance' }
+  ],
+  '2025-08-30': [
+    { title: 'Inter House Dress-up as Favourite Character (I–IV)', type: 'events', description: 'Costume/dress-up competition' },
+    { title: 'Inter House Hindi Literary Competition (IX–XII)', type: 'events', description: 'Literary competition' }
+  ],
+
+  '2025-09-05': [
+    { title: 'Teachers’ Day Celebration', type: 'events', description: 'Teachers’ Day program' }
+  ],
+  '2025-09-06': [
+    { title: 'Inter School Hindi Literary Competition', type: 'events', description: 'Inter-school competition' }
+  ],
+  '2025-09-14': [
+    { title: 'Hindi Diwas', type: 'events', description: 'Hindi language day' }
+  ],
+
+  '2025-10-02': [
+    { title: 'Gandhi Jayanti & Lal Bahadur Shastri Jayanti', type: 'national-holiday', description: 'National observances' }
+  ],
+  '2025-10-18': [
+    { title: 'Parent-Teacher Meeting', type: 'parent-meet', description: 'PTM' }
+  ],
+  '2025-10-17': [
+    { title: 'Inter House Rangoli Competition', type: 'events', description: 'Art/decoration competition' }
+  ],
+  '2025-10-31': [
+    { title: 'National Integration Day', type: 'events', description: 'Unity and integration observance' }
+  ],
+
+  '2025-11-02': [
+    { title: 'Inter School English Literary Competition', type: 'events', description: 'Inter-school competition' }
+  ],
+  '2025-11-05': [
+    { title: 'Guru Nanak Jayanti & Kartik Purnima', type: 'religious-holiday', description: 'Festival observances' }
+  ],
+  '2025-11-08': [
+    { title: 'Inter House Kabaddi', type: 'sports', description: 'Inter-house sports event' }
+  ],
+  '2025-11-11': [
+    { title: 'National Education Day', type: 'events', description: 'Education day observance' }
+  ],
+  '2025-11-14': [
+    { title: 'Children’s Day', type: 'events', description: 'Children’s Day celebration' }
+  ],
+  '2025-11-15': [
+    { title: 'Inter House English Poem Recitation / Speech / Debate Competition', type: 'events', description: 'Inter-house competition' }
+  ],
+  '2025-11-21': [
+    { title: 'Inter School Science Carnival (Day 1)', type: 'events', description: 'Science fair and events' }
+  ],
+  '2025-11-22': [
+    { title: 'Inter School Science Carnival (Day 2)', type: 'events', description: 'Science fair and events' }
+  ],
+  '2025-11-26': [
+    { title: 'Constitution Day', type: 'events', description: 'National Constitution Day observance' }
+  ],
+
+  '2025-12-03': [
+    { title: 'Birth Anniversary of Dr. Rajendra Prasad', type: 'events', description: 'Birth anniversary observance' }
+  ],
+  '2025-12-06': [
+    { title: 'Inter School Volleyball / Kabaddi Competition', type: 'sports', description: 'Inter-school sports competition' }
+  ],
+  '2025-12-13': [
+    { title: 'Inter House Cricket / Volleyball / Kho-Kho Competition', type: 'sports', description: 'Inter-house sports competitions' }
+  ],
+  '2025-12-25': [
+    { title: 'Christmas', type: 'religious-holiday', description: 'Festival observance' }
+  ],
+  
+  '2025-12-29': [
+    { title: 'Annual Sports Day (Day 1)', type: 'sports', description: 'School annual sports meet' }
+  ],
+  '2025-12-30': [
+    { title: 'Annual Sports Day (Day 2)', type: 'sports', description: 'School annual sports meet' }
+  ],
+
+  '2026-01-12': [
+    { title: 'National Youth Day', type: 'events', description: 'Youth Day observance' }
+  ],
+  '2026-01-14': [
+    { title: 'Makar Sankranti', type: 'religious-holiday', description: 'Festival observance' }
+  ],
+  '2026-01-23': [
+    { title: 'Basant Panchami & Birth Anniversary of Subhash Chandra Bose', type: 'events', description: 'Festival and birth anniversary' }
+  ],
+  '2026-01-26': [
+    { title: 'Republic Day', type: 'religious-holiday', description: 'National celebration' }
+  ],
+
+  '2026-02-13': [
+    { title: 'Foundation Day', type: 'events', description: 'School foundation day' }
+  ],
+  '2026-02-15': [
+    { title: 'Maha Shivratri', type: 'religious-holiday', description: 'Festival observance' }
+  ],
+  '2026-02-21': [
+    { title: 'Mother Tongue Day (Matribhasha Diwas)', type: 'events', description: 'Language day observance' }
+  ],
+
+  '2026-03-04': [
+    { title: 'Holi', type: 'religious-holiday', description: 'Festival observance' }
+  ],
+  '2026-03-08': [
+    { title: 'International Women’s Day', type: 'events', description: 'Women’s Day observance' }
+  ],
+
+  '2025-04-18': [
+    { title: 'Good Friday', type: 'national-holiday', description: 'holiday' }
+  ],
+
+  '2025-07-06': [
+    { title: 'Muharram', type: 'national-holiday', description: 'holiday' }
+  ],
+
+  '2025-05-07': [
+  { "title": "PT-1", "type": "exam", "description": "Examinations" }
+],
+'2025-05-08': [
+  { "title": "PT-1", "type": "exam", "description": "Examinations" }
+],
+'2025-05-09': [
+  { "title": "PT-1", "type": "exam", "description": "Examinations" }
+],
+'2025-05-10': [
+  { "title": "PT-1", "type": "exam", "description": "Examinations" }
+],
+
+
+'2025-07-28': [
+  { "title": "PT-2", "type": "exam", "description": "Examinations" }
+],
+'2025-07-29': [
+  { "title": "PT-2", "type": "exam", "description": "Examinations" }
+],
+'2025-07-30': [
+  { "title": "PT-2", "type": "exam", "description": "Examinations" }
+],
+'2025-07-31': [
+  { "title": "PT-2", "type": "exam", "description": "Examinations" }
+],
+
+'2025-09-13': [
+  { "title": "Half Yearly", "type": "exam", "description": "Examinations" }
+],
+'2025-09-15': [
+  { "title": "Half Yearly", "type": "exam", "description": "Examinations" }
+],
+'2025-09-16': [
+  { "title": "Half Yearly", "type": "exam", "description": "Examinations" }
+],
+'2025-09-17': [
+  { "title": "Half Yearly", "type": "exam", "description": "Examinations" }
+],
+'2025-09-18': [
+  { "title": "Half Yearly", "type": "exam", "description": "Examinations" }
+],'2025-09-19': [
+  { "title": "Half Yearly", "type": "exam", "description": "Examinations" }
+],'2025-09-20': [
+  { "title": "Half Yearly", "type": "exam", "description": "Examinations" }
+],'2025-09-22': [
+  { "title": "Half Yearly", "type": "exam", "description": "Examinations" }
+],'2025-09-23': [
+  { "title": "Half Yearly", "type": "exam", "description": "Examinations" }
+],'2025-09-24': [
+  { "title": "Half Yearly", "type": "exam", "description": "Examinations" }
+],'2025-09-25': [
+  { "title": "Half Yearly", "type": "exam", "description": "Examinations" }
+],'2025-09-26': [
+  { "title": "Half Yearly", "type": "exam", "description": "Examinations" }
+],
+'2025-09-27': [
+  { "title": "Half Yearly", "type": "exam", "description": "Examinations" }
+],
+'2025-09-29': [
+  { "title": "Dussehra Break", "type": "national-holiday", "description": "holiday" }
+],'2025-09-30': [
+  { "title": "Dussehra Break", "type": "national-holiday", "description": "holiday" }
+],'2025-10-01': [
+  { "title": "Dussehra Break", "type": "national-holiday", "description": "holiday" }
+],'2025-10-02': [
+  { "title": "Dussehra Break", "type": "national-holiday", "description": "holiday" }
+],'2025-10-03': [
+  { "title": "Dussehra Break", "type": "national-holiday", "description": "holiday" }
+],'2025-10-04': [
+  { "title": "Dussehra Break", "type": "national-holiday", "description": "holiday" }
+],
+
+
+'2025-11-26': [
+  { "title": "PT-3", "type": "exam", "description": "Examinations" }
+],
+'2025-11-27': [
+  { "title": "PT-3", "type": "exam", "description": "Examinations" }
+],
+'2025-11-28': [
+  { "title": "PT-3", "type": "exam", "description": "Examinations" }
+],
+'2025-11-29': [
+  { "title": "PT-3", "type": "exam", "description": "Examinations" }
+],
+
+
+
+'2026-01-19': [
+  { "title": "PT-4", "type": "exam", "description": "Examinations" }
+],
+'2026-01-20': [
+  { "title": "PT-4", "type": "exam", "description": "Examinations" }
+],
+'2026-01-21': [
+  { "title": "PT-4", "type": "exam", "description": "Examinations" }
+],
+'2026-01-22': [
+  { "title": "PT-4", "type": "exam", "description": "Examinations" }
+],
+
+
+
+
+'2025-10-20': [
+  { "title": "Deepawali & Chhat Puja", "type": "national-holiday", "description": "Deepawali & Chhat Puja" }
+],
+'2025-10-21': [
+  { "title": "Deepawali & Chhat Puja", "type": "national-holiday", "description": "Deepawali & Chhat Puja" }
+],
+'2025-10-22': [
+  { "title": "Deepawali & Chhat Puja", "type": "national-holiday", "description": "Deepawali & Chhat Puja" }
+],
+'2025-10-23': [
+  { "title": "Deepawali & Chhat Puja", "type": "national-holiday", "description": "Deepawali & Chhat Puja" }
+],
+'2025-10-24': [
+  { "title": "Deepawali & Chhat Puja", "type": "national-holiday", "description": "Deepawali & Chhat Puja" }
+],
+'2025-10-25': [
+  { "title": "Deepawali & Chhat Puja", "type": "national-holiday", "description": "Deepawali & Chhat Puja" }
+],
+'2025-10-27': [
+  { "title": "Deepawali & Chhat Puja", "type": "national-holiday", "description": "Deepawali & Chhat Puja" }
+],
+'2025-10-28': [
+  { "title": "Deepawali & Chhat Puja", "type": "national-holiday", "description": "Deepawali & Chhat Puja" }
+],'2025-10-29': [
+  { "title": "Deepawali & Chhat Puja", "type": "national-holiday", "description": "Deepawali & Chhat Puja" }
+],
+
+
+
+
+'2025-12-17': [
+  { "title": "Pre Board - I", "type": "exam", "description": "Examinations" }
+],
+'2025-12-18': [
+  { "title": "Pre Board - I", "type": "exam", "description": "Examinations" }
+],
+'2025-12-19': [
+  { "title": "Pre Board - I", "type": "exam", "description": "Examinations" }
+],
+'2025-12-20': [
+  { "title": "Pre Board - I", "type": "exam", "description": "Examinations" }
+],
+'2025-12-22': [
+  { "title": "Pre Board - I", "type": "exam", "description": "Examinations" }
+],
+'2025-12-23': [
+  { "title": "Pre Board - I", "type": "exam", "description": "Examinations" }
+],
+'2025-12-24': [
+  { "title": "Pre Board - I", "type": "exam", "description": "Examinations" }
+],
+
+
+
+
+
+'2026-01-10': [
+  { "title": "Pre Board - II", "type": "exam", "description": "Examinations" }
+],
+
+'2026-01-12': [
+  { "title": "Pre Board - II", "type": "exam", "description": "Examinations" }
+],
+'2026-01-13': [
+  { "title": "Pre Board - II", "type": "exam", "description": "Examinations" }
+],
+'2026-01-15': [
+  { "title": "Pre Board - II", "type": "exam", "description": "Examinations" }
+],
+'2026-01-16': [
+  { "title": "Pre Board - II", "type": "exam", "description": "Examinations" }
+],
+'2026-01-17': [
+  { "title": "Pre Board - II", "type": "exam", "description": "Examinations" }
+],
+'2026-01-19': [
+  { "title": "Pre Board - II", "type": "exam", "description": "Examinations" },
+  { "title": "PT-4", "type": "exam", "description": "Examinations" }
+],
+
+
+
+
+
+
+'2026-01-01': [
+  { "title": "Winter vacation", "type": "national-holiday", "description": "Deepawali & Chhat Puja" }
+],
+'2026-01-02': [
+  { "title": "Winter vacation", "type": "national-holiday", "description": "Deepawali & Chhat Puja" }
+],
+'2026-01-03': [
+  { "title": "Winter vacation", "type": "national-holiday", "description": "Deepawali & Chhat Puja" }
+],
+'2026-01-05': [
+  { "title": "Winter vacation", "type": "national-holiday", "description": "Deepawali & Chhat Puja" }
+],
+'2026-01-06': [
+  { "title": "Winter vacation", "type": "national-holiday", "description": "Deepawali & Chhat Puja" }
+],
+'2026-01-07': [
+  { "title": "Winter vacation", "type": "national-holiday", "description": "Deepawali & Chhat Puja" }
+],
+'2026-01-08': [
+  { "title": "Winter vacation", "type": "national-holiday", "description": "Deepawali & Chhat Puja" }
+],
+
+
+}
+    
+
+
+    function isSunday(date) {
+      const day = new Date(date).getDay();
+      return day === 0;
+    }
+    function updateTodayDate() {
+      const today = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      document.getElementById('today-date').textContent = today.toLocaleDateString('en-US', options);
+      const sessionStart = new Date('2024-04-01');
+      const diffTime = today - sessionStart;
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      const academicDay = Math.max(1, Math.min(220, diffDays));
+      document.getElementById('academic-day').textContent = `${academicDay}/365`;
+    }
+    function generateUpcomingEvents() {
+      const today = new Date(), upcomingEvents = [];
+      for (let i = 0; i < 30; i++) {
+        const checkDate = new Date(today); checkDate.setDate(today.getDate() + i);
+        const dateStr = checkDate.toISOString().split('T')[0];
+        if (events[dateStr]) events[dateStr].forEach(event => upcomingEvents.push({ ...event, date: dateStr, dateObj: new Date(checkDate) }));
+      }
+      upcomingEvents.sort((a, b) => a.dateObj - b.dateObj);
+      const nextEvents = upcomingEvents.slice(0, 4);
+      document.getElementById('upcoming-events-list').innerHTML = nextEvents.map(event => {
+        const day = event.dateObj.getDate(), month = months[event.dateObj.getMonth()].slice(0, 3);
+        return `<div class="event-item"><div class="event-date">${day}<br>${month}</div>
+        <div class="event-details"><h4>${event.title}</h4><p>${event.description}</p>
+        <span class="event-category">${event.type.replace('-', ' ')}</span></div></div>`;
+      }).join('');
+    }
+    function generateCalendar(month, year) {
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const daysInPrevMonth = new Date(year, month, 0).getDate();
+      document.getElementById('current-month').textContent = `${months[month]} ${year}`;
+      let calendarHTML = '';
+      for (let i = firstDay - 1; i >= 0; i--) {
+        const day = daysInPrevMonth - i;
+        calendarHTML += `<div class="calendar-day other-month"><div class="day-number">${day}</div></div>`;
+      }
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const isToday = day === currentDate.getDate() && month === currentDate.getMonth() && year === currentDate.getFullYear();
+        const dayEvents = events[dateStr] || [], hasEvents = dayEvents.length > 0, sunday = isSunday(dateStr);
+        let eventsHTML = '';
+        dayEvents.forEach(event => {
+          eventsHTML += `<div class="event ${event.type}" onclick="showEventModal('${event.title}', '${dateStr}', '${event.description}', '${event.type}')" title="${event.title}">${event.title}</div>`;
+        });
+        calendarHTML += `<div class="calendar-day ${isToday ? 'today' : ''} ${hasEvents ? 'has-events' : ''} ${sunday ? 'sunday' : ''}" onclick="selectDate('${dateStr}')">
+          <div class="day-number">${day}</div>
+          <div class="day-events">${eventsHTML}</div>
+        </div>`;
+      }
+      const totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
+      const remainingCells = totalCells - (firstDay + daysInMonth);
+      for (let day = 1; day <= remainingCells; day++) {
+        calendarHTML += `<div class="calendar-day other-month"><div class="day-number">${day}</div></div>`;
+      }
+      document.getElementById('calendar-grid').innerHTML = `
+        <div class="day-header">Sunday</div>
+        <div class="day-header">Monday</div>
+        <div class="day-header">Tuesday</div>
+        <div class="day-header">Wednesday</div>
+        <div class="day-header">Thursday</div>
+        <div class="day-header">Friday</div>
+        <div class="day-header">Saturday</div>
+        ${calendarHTML}
+      `;
+    }
+    function previousMonth() {
+      currentMonth--; if (currentMonth < 0) { currentMonth = 11; currentYear--; } generateCalendar(currentMonth, currentYear);
+    }
+    function nextMonth() {
+      currentMonth++; if (currentMonth > 11) { currentMonth = 0; currentYear++; } generateCalendar(currentMonth, currentYear);
+    }
+    function showEventModal(title, date, description, type) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-date').textContent = new Date(date).toLocaleDateString('en-US', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+      });
+      document.getElementById('modal-description').textContent = description;
+      document.getElementById('event-modal').classList.add('active');
+    }
+    function closeModal() { document.getElementById('event-modal').classList.remove('active'); }
+    function selectDate(date) {
+      const dayEvents = events[date];
+      if (dayEvents && dayEvents.length > 0) { showEventModal(dayEvents[0].title, date, dayEvents.description, dayEvents.type); }
+    }
+    document.getElementById('event-modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+      else if (e.key === 'ArrowLeft') previousMonth();
+      else if (e.key === 'ArrowRight') nextMonth();
+    });
+    updateTodayDate();
+    generateUpcomingEvents();
+    generateCalendar(currentMonth, currentYear);
+    setInterval(() => { updateTodayDate(); generateUpcomingEvents(); }, 86400000);
+
+
+
+    
+           // Enhanced Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.style.transform = 'translateY(0)';
+                navbar.style.opacity = '0.95';
+                navbar.querySelector('.bg-white\\/95').classList.add('shadow-xl');
+            } else {
+                navbar.style.transform = 'translateY(0)';
+                navbar.style.opacity = '1';
+                navbar.querySelector('.bg-white\\/95').classList.remove('shadow-xl');
+            }
+        });
+
+        // Enhanced hover effects for navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+           
+            link.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Sub navbar functionality - show/hide on About click
+        const subNavbar = document.getElementById('sub-navbar');
+        const aboutLink = document.querySelector('a[href="about.html"]');
+       
+        aboutLink.addEventListener('click', function(e) {
+            e.preventDefault();
+           
+            if (subNavbar.classList.contains('hidden')) {
+                // Show sub navbar
+                subNavbar.classList.remove('hidden');
+                setTimeout(() => {
+                    subNavbar.style.opacity = '1';
+                    subNavbar.style.transform = 'translateY(0)';
+                }, 10);
+            } else {
+                // Hide sub navbar
+                subNavbar.style.opacity = '0';
+                subNavbar.style.transform = 'translateY(-4px)';
+                setTimeout(() => {
+                    subNavbar.classList.add('hidden');
+                }, 300);
+            }
+        });
+
+        // Hide sub navbar when clicking on other nav links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            if (link.getAttribute('href') !== 'about.html') {
+                link.addEventListener('click', function() {
+                    subNavbar.style.opacity = '0';
+                    subNavbar.style.transform = 'translateY(-4px)';
+                    setTimeout(() => {
+                        subNavbar.classList.add('hidden');
+                    }, 300);
+                });
+            }
+        });
+
+        // Enhanced mobile menu with slide animation
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        const mobileMoreLink = document.getElementById('mobile-more-link');
+        const mobileMoreSubmenu = document.getElementById('mobile-more-submenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+           
+            if (navMenu.classList.contains('hidden')) {
+                navMenu.classList.remove('hidden');
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    navMenu.style.opacity = '1';
+                    navMenu.style.transform = 'translateY(0)';
+                }, 10);
+            } else {
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    navMenu.classList.add('hidden');
+                }, 300);
+            }
+           
+            // Animate hamburger menu
+            const spans = mobileMenuBtn.querySelectorAll('span');
+            if (mobileMenuBtn.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        // Mobile: toggle More submenu
+        if (mobileMoreLink && mobileMoreSubmenu) {
+            mobileMoreLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                mobileMoreSubmenu.classList.toggle('hidden');
+                const icon = mobileMoreLink.querySelector('.material-symbols-rounded');
+                if (icon) {
+                    icon.textContent = mobileMoreSubmenu.classList.contains('hidden') ? 'expand_more' : 'expand_less';
+                }
+            });
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                // Special handling for About link in mobile menu
+                if (link.getAttribute('href') === 'about.html') {
+                    // Don't close mobile menu for About link, let it handle sub navbar
+                    return;
+                }
+                // Keep menu open when toggling More submenu
+                if (link.id === 'mobile-more-link') {
+                    return;
+                }
+               
+                mobileMenuBtn.classList.remove('active');
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    navMenu.classList.add('hidden');
+                }, 300);
+               
+                // Reset hamburger menu
+                const spans = mobileMenuBtn.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+               
+                // Hide sub navbar when clicking other links
+                subNavbar.style.opacity = '0';
+                subNavbar.style.transform = 'translateY(-4px)';
+                setTimeout(() => {
+                    subNavbar.classList.add('hidden');
+                }, 300);
+            });
+        });
+
+        // Handle About link in mobile menu
+        const mobileAboutLink = document.querySelector('#nav-menu a[href="about.html"]');
+        if (mobileAboutLink) {
+            mobileAboutLink.addEventListener('click', function(e) {
+                e.preventDefault();
+               
+                // Close the main mobile menu first
+                mobileMenuBtn.classList.remove('active');
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    navMenu.classList.add('hidden');
+                }, 300);
+               
+                // Reset hamburger menu
+                const spans = mobileMenuBtn.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+               
+                if (subNavbar.classList.contains('hidden')) {
+                    // Show sub navbar
+                    subNavbar.classList.remove('hidden');
+                    setTimeout(() => {
+                        subNavbar.style.opacity = '1';
+                        subNavbar.style.transform = 'translateY(0)';
+                    }, 10);
+                } else {
+                    // Hide sub navbar
+                    subNavbar.style.opacity = '0';
+                    subNavbar.style.transform = 'translateY(-4px)';
+                    setTimeout(() => {
+                        subNavbar.classList.add('hidden');
+                    }, 300);
+                }
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent);
+                const increment = target / 100;
+                let current = 0;
+               
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.ceil(current) + '+';
+                        setTimeout(updateCounter, 20);
+                    } else {
+                        counter.textContent = target + '+';
+                    }
+                };
+               
+                updateCounter();
+            });
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                   
+                    // Trigger counter animation for about section
+                    if (entry.target.id === 'about') {
+                        animateCounters();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for animations
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 0.8s ease-out';
+            observer.observe(section);
+        });
+
+        // Magnetic hover effect
+        document.querySelectorAll('.magnetic-hover').forEach(element => {
+            element.addEventListener('mousemove', (e) => {
+                const rect = element.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+               
+                element.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(1.05)`;
+            });
+           
+            element.addEventListener('mouseleave', () => {
+                element.style.transform = 'translate(0, 0) scale(1)';
+            });
+        });
+
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.floating-element');
+           
+            parallaxElements.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1);
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // 3D tilt interaction for logo
+        (function() {
+            const logo = document.getElementById('site-logo');
+            if (!logo) return;
+            const maxTilt = 12; // degrees
+            const scale = 1.04;
+            const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+            if (!isFinePointer) return; // skip on touch
+
+            const handleMove = (e) => {
+                const rect = logo.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const pctX = (x / rect.width) * 2 - 1; // -1 to 1
+                const pctY = (y / rect.height) * 2 - 1; // -1 to 1
+                const rotateY = pctX * maxTilt;
+                const rotateX = -pctY * maxTilt;
+                logo.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
+            };
+
+            const reset = () => {
+                logo.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+            };
+
+            logo.addEventListener('mousemove', handleMove);
+            logo.addEventListener('mouseleave', reset);
+        })();
+
+        // Video Modal Functionality
+        const videoModal = document.getElementById('video-modal');
+        const campusVideoBtn = document.getElementById('campus-video-btn');
+        const closeVideoModal = document.getElementById('close-video-modal');
+        const campusVideo = document.getElementById('campus-video');
+        const videoPlaceholder = document.getElementById('video-placeholder');
+
+        // Open video modal
+        campusVideoBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            videoModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+           
+            // Check if video file exists
+            const videoSrc = 'gns.mp4';
+            fetch(videoSrc, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        // Video file exists, show video player
+                        campusVideo.style.display = 'block';
+                        videoPlaceholder.style.display = 'none';
+                        campusVideo.src = videoSrc;
+                    } else {
+                        // Video file doesn't exist, show placeholder
+                        campusVideo.style.display = 'none';
+                        videoPlaceholder.style.display = 'flex';
+                    }
+                })
+                .catch(() => {
+                    // Error fetching video, show placeholder
+                    campusVideo.style.display = 'none';
+                    videoPlaceholder.style.display = 'flex';
+                });
+        });
+
+        // Close video modal
+        closeVideoModal.addEventListener('click', function() {
+            videoModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            // Pause video when closing
+            if (campusVideo.src) {
+                campusVideo.pause();
+            }
+        });
+
+        // Close modal when clicking outside
+        videoModal.addEventListener('click', function(e) {
+            if (e.target === videoModal) {
+                videoModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+                if (campusVideo.src) {
+                    campusVideo.pause();
+                }
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
+                videoModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+                if (campusVideo.src) {
+                    campusVideo.pause();
+                }
+            }
+        });
+    </script>
+   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const chatBody = document.querySelector(".chat-body");
+      let autoScrollEnabled = true; // default locked to bottom
+   
+      // Auto-scroll function
+      function autoScroll() {
+        if (autoScrollEnabled) {
+          chatBody.scrollTo({
+            top: chatBody.scrollHeight,
+            behavior: "smooth"
+          });
+        }
+      }
+   
+      // Detect if user scrolls away from bottom
+      chatBody.addEventListener("scroll", () => {
+        const atBottom =
+          chatBody.scrollHeight - chatBody.scrollTop <= chatBody.clientHeight + 10;
+        autoScrollEnabled = atBottom; // only enable if near bottom
+      });
+   
+      // Watch for new messages
+      const observer = new MutationObserver(autoScroll);
+      observer.observe(chatBody, { childList: true, subtree: true });
+   
+      // Scroll when chatbot is opened
+      document.querySelector("#chatbot-toggler").addEventListener("click", () => {
+        setTimeout(autoScroll, 100);
+      });
+    });
+</script>
+
+  </body>
+</html>
