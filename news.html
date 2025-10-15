@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News And Events</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+     <link href="logo.png" rel="icon">
+     <link rel="stylesheet" href="nav.css">
+      <script src="protect.js"></script>
+
+     <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#f59e0b',
+                        accent: '#3b82f6',
+                        glass: 'rgba(255, 255, 255, 0.1)',
+                        glassDark: 'rgba(15, 23, 42, 0.8)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-down': 'slideDown 0.8s ease-out',
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'scale-in': 'scaleIn 0.6s ease-out',
+                        'rotate-in': 'rotateIn 0.8s ease-out',
+                        'bounce-in': 'bounceIn 1s ease-out',
+                        'liquid': 'liquid 3s ease-in-out infinite',
+                        'shimmer': 'shimmer 2s linear infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient-x': 'gradient-x 15s ease infinite',
+                        'gradient-y': 'gradient-y 15s ease infinite',
+                        'gradient-xy': 'gradient-xy 15s ease infinite',
+                    },
+                    backdropBlur: {
+                        'xs': '2px',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Modern CSS for News Page -->
+    <style>
+        @keyframes gradient-x {
+            0%, 100% {
+                transform: translateX(0%);
+            }
+            50% {
+                transform: translateX(100%);
+            }
+        }
+        
+        @keyframes gradient-y {
+            0%, 100% {
+                transform: translateY(0%);
+            }
+            50% {
+                transform: translateY(100%);
+            }
+        }
+        
+        @keyframes gradient-xy {
+            0%, 100% {
+                transform: translate(0%, 0%);
+            }
+            25% {
+                transform: translate(100%, 0%);
+            }
+            50% {
+                transform: translate(100%, 100%);
+            }
+            75% {
+                transform: translate(0%, 100%);
+            }
+        }
+        
+        .animate-gradient-x {
+            background-size: 200% 200%;
+            animation: gradient-x 15s ease infinite;
+        }
+        
+        .animate-gradient-y {
+            background-size: 200% 200%;
+            animation: gradient-y 15s ease infinite;
+        }
+        
+        .animate-gradient-xy {
+            background-size: 400% 400%;
+            animation: gradient-xy 15s ease infinite;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #f59e0b, #f97316);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #d97706, #ea580c);
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .text-5xl {
+                font-size: 2.5rem !important;
+            }
+            
+            .text-6xl {
+                font-size: 3rem !important;
+            }
+            
+            .text-7xl {
+                font-size: 3.5rem !important;
+            }
+            
+            .grid.md\\:grid-cols-2 {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .grid.lg\\:grid-cols-3 {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        /* Card hover effects */
+        .group:hover .group-hover\\:scale-110 {
+            transform: scale(1.1);
+        }
+        
+        .group:hover .group-hover\\:text-amber-600 {
+            color: #d97706;
+        }
+        
+        .group:hover .group-hover\\:text-orange-600 {
+            color: #ea580c;
+        }
+        
+        .group:hover .group-hover\\:text-red-600 {
+            color: #dc2626;
+        }
+        
+        /* Loading animation */
+        .loading {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        /* Fade in animation */
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+</head>
+<body class="font-inter  bg-white text-gray-800 overflow-x-hidden">
+    <div class="floating-elements">
+        <div class="floating-element w-20 h-20 bg-gradient-to-r from-secondary/20 to-orange-500/20 rounded-full blur-sm"></div>
+        <div class="floating-element w-32 h-32 bg-gradient-to-r from-accent/20 to-blue-600/20 rounded-full blur-sm"></div>
+        <div class="floating-element w-16 h-16 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-sm"></div>
+        <div class="floating-element w-24 h-24 bg-gradient-to-r from-green-400/20 to-teal-500/20 rounded-full blur-sm"></div>
+    </div>          
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500">
+       
+        <div class="bg-white/95 backdrop-blur-md shadow-lg mx-4 mt-4 mb-4 rounded-2xl border border-gray-200/50">
+            <div class="max-w-7xl mx-auto px-6 py-4">
+                <div class="flex justify-between items-center">
+                  <!-- Logo -->
+                   <!-- Logo -->
+                    <a href="index.html" class="flex items-center space-x-3 group">
+                        <div id="site-logo" class="relative logo-tilt">
+                            <img src="logo.png" alt="Gyan Niketan" class="h-12 w-12 rounded-xl object-cover shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-r from-secondary to-orange-500 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold gradient-text">Gyan Niketan</h1>
+                            <p class="text-xs text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">सत्वात संजायते ज्ञानम्</p>
+                        </div>
+                    </a>
+                   
+                    <ul class="hidden lg:flex space-x-8 items-center">
+                        <li><a href="index.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Home</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="about.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">About</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                       
+                        <li><a href="academics.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Academics</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="admissions.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Admissions</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="alumni.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Alumni</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="contact.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Contact</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                              <li class="relative group">
+                            <a href="#" class="nav-link relative" id="more-link" aria-haspopup="true" aria-expanded="false">
+                                <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">More</span>
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <ul class="absolute right-0 mt-3 w-56 bg-white/95 backdrop-blur-md shadow-xl rounded-xl border border-gray-200/70 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                                <li>
+                                    <a href="https://www.cbse.gov.in/"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary rounded-t-xl">CBSE</a>
+                                </li>
+                                <li>
+                                    <a href="https://ncert.nic.in/" target="_blank" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">NCERT</a>
+                                </li>
+                                 <li>
+                                    <a href="developers.html" target="_blank" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Developers</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="career.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Career</a>
+                                </li>
+                                 <li>
+                                    <a href="council.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Council</a>
+                                </li>
+                                  <li>
+                                    <a href="activities.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Activity</a>
+                                </li>
+                                <li>
+                                    <a href="hostel.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Hostel Life</a>
+                                </li>
+                                <li>
+                                    <a href="mandatorydisclosure.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary rounded-b-xl">Mandatory Disclosure</a>
+                                </li>
+                                 <li>
+                                    <a href="Pedagogical Planner.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary rounded-b-xl">Pedagogical Planner</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li>
+                            <a href="https://student.schoolcanvas.com/" target="_blank" rel="noopener noreferrer">
+                                <button class="bg-gradient-to-r from-secondary to-orange-500 text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 glow-on-hover">
+                                    Student Login
+                                </button>
+                            </a>
+                           
+                           
+                        </li>
+                    </ul>
+                   
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="lg:hidden flex flex-col space-y-1 p-2 group">
+                        <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 group-hover:bg-secondary"></span>
+                        <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 group-hover:bg-secondary"></span>
+                        <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 group-hover:bg-secondary"></span>
+                    </button>
+                </div>
+               
+                <!-- Mobile Menu -->
+                <ul id="nav-menu" class="lg:hidden hidden mt-4 space-y-4 border-t border-gray-200 pt-4 transition-all duration-300">
+                    <li><a href="index.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Home</a></li>
+                    <li><a href="about.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">About</a></li>
+                    <li><a href="facilities.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Facilities</a></li>
+                    <li><a href="admissions.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Admissions</a></li>
+                    <li><a href="alumni.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Alumni</a></li>
+                    <li><a href="contact.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Contact</a></li>
+                     <li>
+                        <a href="#" id="mobile-more-link" class="flex items-center justify-between text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">
+                            <span>More</span>
+                            <span class="material-symbols-rounded text-base">expand_more</span>
+                        </a>
+                        <ul id="mobile-more-submenu" class="hidden mt-1 ml-2 space-y-1">
+                            <li><a href="https://www.cbse.gov.in/"target="_blank"  class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">CBSE</a></li>
+                            <li><a href="https://ncert.nic.in/" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">NCERT</a></li>
+                         <li><a href="developers.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Developers</a></li>
+                            <li><a href="career.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Career</a></li>
+                        <li><a href="council.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Council</a></li>
+                        <li><a href="activities.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Activity</a></li>
+                        <li><a href="hostel.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Hostel Life</a></li>
+
+                            <li><a href="mandatorydisclosure.html"  class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Mandatory Disclosure</a></li>
+                               <li><a href="Pedagogical Planner.html"  class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Pedagogical Planner</a></li>
+                        </ul>
+                    </li>
+                   
+                    <li class="pt-2">
+                        <a href="https://student.schoolcanvas.com/" target="_blank" rel="noopener noreferrer">
+                            <button class="bg-gradient-to-r from-secondary to-orange-500 text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 glow-on-hover">
+                                Student Login
+                            </button>
+                        </a>
+                       
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sub Navigation Bar -->
+    <nav id="sub-navbar" class="fixed top-24 w-full z-40 transition-all duration-500 bg-white/5 backdrop-blur-lg hidden opacity-0 transform -translate-y-4">
+        <div class="max-w-7xl mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Quick Links -->
+                <div class="hidden lg:flex space-x-6 items-center">
+                    <a href="about.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-info-circle text-xs"></i>
+                        <span>About Us</span>
+                    </a>
+                    <a href="vision.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-eye text-xs"></i>
+                        <span>Vision</span>
+                    </a>
+                    <a href="news.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-newspaper text-xs"></i>
+                        <span>News & Events</span>
+                    </a>
+                    <a href="Academics Calendar.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-calendar-alt text-xs"></i>
+                        <span>Academic Calendar</span>
+                    </a>
+                    <a href="facilities.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-building text-xs"></i>
+                        <span>Facilities</span>
+                    </a>
+                    <a href="faculty.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-chalkboard-teacher text-xs"></i>
+                        <span>Faculty</span>
+                    </a>
+                    <a href="deskmessages.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-comments text-xs"></i>
+                        <span>Desk Messages</span>
+                    </a>
+                    <a href="gallery.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-images text-xs"></i>
+                        <span>Gallery</span>
+                    </a>
+                    
+                </div>
+
+             
+
+            <!-- Mobile Sub Menu -->
+            <div class="lg:hidden mt-3 pt-3 border-t border-white/20">
+                <div class="flex flex-wrap gap-2">
+                    <a href="about.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-info-circle mr-1"></i>About Us
+                    </a>
+                    <a href="vision.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-eye mr-1"></i>Vision
+                    </a>
+                    <a href="news.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-newspaper mr-1"></i>News & Events
+                    </a>
+                    <a href="Academics Calendar.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-calendar-alt mr-1"></i>Calendar
+                    </a>
+                    <a href="facilities.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-building mr-1"></i>Facilities
+                    </a>
+                    <a href="faculty.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-chalkboard-teacher mr-1"></i>Faculty
+                    </a>
+                    <a href="deskmessages.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-comments mr-1"></i>Desk Messages
+                    </a>
+                    <a href="gallery.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-images mr-1"></i>Gallery
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    
+    
+<br></br>
+
+
+<!-- Hero Section -->
+<section class="relative py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23f59e0b" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-40"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-amber-200/50 rounded-full shadow-lg mb-8">
+                <div class="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
+                <span class="text-sm font-medium text-slate-700">Latest Updates</span>
+            </div>
+            
+         <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 leading-tight whitespace-nowrap">
+  <span>News &</span>
+  <span class="bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
+    Events
+  </span>
+</h1>
+
+            
+            <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                Stay updated with the latest happenings, achievements, and upcoming events at Gyan Niketan.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- News Section -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+            <button data-filter="all" class="px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full font-medium hover:from-amber-600 hover:to-orange-600 transition-all duration-300 shadow-lg hover:shadow-xl">
+                All News
+            </button>
+            <button data-filter="events" class="px-6 py-3 bg-gray-100 text-gray-700 rounded-full font-medium hover:bg-amber-50 hover:text-amber-700 transition-colors duration-300">
+                Events
+            </button>
+            <button data-filter="achievements" class="px-6 py-3 bg-gray-100 text-gray-700 rounded-full font-medium hover:bg-amber-50 hover:text-amber-700 transition-colors duration-300">
+                Achievements
+            </button>
+            <button data-filter="announcements" class="px-6 py-3 bg-gray-100 text-gray-700 rounded-full font-medium hover:bg-amber-50 hover:text-amber-700 transition-colors duration-300">
+                Announcements
+            </button>
+        </div>
+
+        <!-- Featured News Card -->
+        <div class="mb-16">
+            <div class="bg-gradient-to-r from-amber-600 to-orange-600 rounded-3xl overflow-hidden shadow-2xl">
+                <div class="grid lg:grid-cols-2 gap-0">
+                    <div class="relative">
+                        <img src="DSC09513.JPG" alt="Republic Day 2025" class="w-full h-80 lg:h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        <div class="absolute top-6 left-6">
+                            <span class="px-3 py-1 bg-white/90 text-amber-600 rounded-full text-sm font-semibold">Featured</span>
+                        </div>
+                    </div>
+                    <div class="p-8 lg:p-12 flex flex-col justify-center">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-2 h-2 bg-white rounded-full"></div>
+                            <span class="text-white/80 text-sm font-medium">Republic Day 2025</span>
+                        </div>
+                        <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
+                            Republic Day Celebration
+                        </h2>
+                        <p class="text-white/90 text-lg mb-6 leading-relaxed">
+                            Students showcased cultural performances, speeches, and a patriotic spirit to honor the nation. The celebration included flag hoisting, cultural programs, and inspiring speeches.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 text-white font-semibold hover:gap-4 transition-all duration-300">
+                            Read Full Story
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- News Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- News Card 1 -->
+            <article data-category="events" class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden hover:-translate-y-2">
+                <div class="relative overflow-hidden">
+                    <img src="DSC09205.JPG" alt="Science Exhibition" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute top-4 left-4">
+                        <span class="px-3 py-1 bg-white/90 text-amber-600 rounded-full text-sm font-semibold">Science</span>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-2 h-2 bg-amber-500 rounded-full"></div>
+                        <span class="text-gray-500 text-sm font-medium">Dec 28, 2024</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition-colors duration-300">
+                        Annual Science Exhibition
+                    </h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Innovative student projects were displayed, encouraging research and creativity among students.
+                    </p>
+                    <a href="#" class="inline-flex items-center gap-2 text-amber-600 font-semibold hover:gap-4 transition-all duration-300">
+                        Read More
+                        <i class="fas fa-arrow-right text-sm"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- News Card 2 -->
+            <article data-category="events" class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden hover:-translate-y-2">
+                <div class="relative overflow-hidden">
+                    <img src="https://webcontent.sgp1.digitaloceanspaces.com/content/WebGallery/638504311837856528_DSC03393.JPG" alt="Sports Day" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute top-4 left-4">
+                        <span class="px-3 py-1 bg-white/90 text-orange-600 rounded-full text-sm font-semibold">Sports</span>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                        <span class="text-gray-500 text-sm font-medium">Dec 29, 2023</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-300">
+                        Annual Sports Day
+                    </h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        A day of fun, fitness, and sportsmanship with track events, games, and award distribution.
+                    </p>
+                    <a href="#" class="inline-flex items-center gap-2 text-orange-600 font-semibold hover:gap-4 transition-all duration-300">
+                        Read More
+                        <i class="fas fa-arrow-right text-sm"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- News Card 3 -->
+            <article data-category="achievements" class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden hover:-translate-y-2">
+                <div class="relative overflow-hidden">
+                    <img src="DSC09513.JPG" alt="Cultural Event" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute top-4 left-4">
+                        <span class="px-3 py-1 bg-white/90 text-red-600 rounded-full text-sm font-semibold">Culture</span>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+                        <span class="text-gray-500 text-sm font-medium">Jan 26, 2025</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors duration-300">
+                        Cultural Festival
+                    </h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Students showcased their talents through music, dance, drama, and art exhibitions.
+                    </p>
+                    <a href="#" class="inline-flex items-center gap-2 text-red-600 font-semibold hover:gap-4 transition-all duration-300">
+                        Read More
+                        <i class="fas fa-arrow-right text-sm"></i>
+                    </a>
+                </div>
+            </article>
+                </div>
+
+        <!-- Load More Button -->
+        <div class="text-center mt-12">
+            <button data-load-more class="px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300">
+                Load More News
+            </button>
+        </div>
+        </div>
+    </section>
+
+
+<!-- Admission Results Section -->
+<section class="py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-amber-200/50 rounded-full shadow-lg mb-8">
+                <div class="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
+                <span class="text-sm font-medium text-slate-700">Important Announcement</span>
+            </div>
+            
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-tight">
+                <span class="block">Admission</span>
+                <span class="block bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
+                    Results 2025
+                </span>
+            </h2>
+            
+            <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                Check your admission status for the session 2025-2026. Congratulations to all selected students!
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Results Card -->
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden hover:shadow-3xl transition-all duration-300 hover:-translate-y-2">
+                <div class="p-8 lg:p-12">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-trophy text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-900">Merit List Available</h3>
+                            <p class="text-slate-600">Class II to IV</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-slate-600 mb-8 leading-relaxed">
+                        The merit list for classes II to IV has been published. Selected students can download their admission letters and complete the enrollment process.
+                    </p>
+                    
+                    <a href="https://webcontent.sgp1.digitaloceanspaces.com/content/WebGallery/40550162_638741797147405607_ClassIItoIV.jpeg" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="inline-flex items-center gap-3 bg-gradient-to-r from-amber-600 to-orange-600 text-white px-8 py-4 rounded-2xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300">
+                        <i class="fas fa-download"></i>
+                        Download Merit List
+                        <i class="fas fa-external-link-alt text-sm"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Important Dates Card -->
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden hover:shadow-3xl transition-all duration-300 hover:-translate-y-2">
+                <div class="p-8 lg:p-12">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-calendar-alt text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-900">Important Dates</h3>
+                            <p class="text-slate-600">Session 2025-26</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3 p-4 bg-amber-50 rounded-xl">
+                            <div class="w-2 h-2 bg-amber-500 rounded-full"></div>
+                            <div>
+                                <p class="font-semibold text-slate-900">Document Verification</p>
+                                <p class="text-sm text-slate-600">March 1-15, 2025</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-3 p-4 bg-orange-50 rounded-xl">
+                            <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                            <div>
+                                <p class="font-semibold text-slate-900">Fee Payment</p>
+                                <p class="text-sm text-slate-600">March 16-31, 2025</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-3 p-4 bg-red-50 rounded-xl">
+                            <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+                            <div>
+                                <p class="font-semibold text-slate-900">Classes Begin</p>
+                                <p class="text-sm text-slate-600">March 27, 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- JavaScript for News Page -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filter tabs functionality
+            const filterButtons = document.querySelectorAll('button[data-filter]');
+            const newsCards = document.querySelectorAll('article[data-category]');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Update active button
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('bg-gradient-to-r', 'from-amber-500', 'to-orange-500', 'text-white', 'shadow-lg');
+                        btn.classList.add('bg-gray-100', 'text-gray-700');
+                    });
+                    this.classList.remove('bg-gray-100', 'text-gray-700');
+                    this.classList.add('bg-gradient-to-r', 'from-amber-500', 'to-orange-500', 'text-white', 'shadow-lg');
+                    
+                    // Filter cards
+                    newsCards.forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                            card.style.display = 'block';
+                            card.classList.add('fade-in');
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Intersection Observer for fade-in animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all cards and sections
+            document.querySelectorAll('article, section').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Load more functionality
+            const loadMoreBtn = document.querySelector('button[data-load-more]');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', function() {
+                    // Simulate loading more content
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Loading...';
+                    this.disabled = true;
+                    
+                    setTimeout(() => {
+                        this.innerHTML = 'Load More News';
+                        this.disabled = false;
+                        // Here you would typically load more content via AJAX
+                    }, 2000);
+                });
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16 relative mt-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold gradient-text mb-6">Gyan Niketan</h3>
+                    <p class="text-gray-300 leading-relaxed mb-6">To serve a very lagging and visible need of the city and its surrounding with an institution which, besides giving the children the best education, cares for all round development physical, mental and spiritual and inculcates in them a deep love for high moral values and due respect for all religion.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/gyanniketanpatna/" target="_blank"class="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center hover:bg-secondary hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-facebook-f text-white"></i>
+                        </a>
+                       
+                        <a href="https://www.instagram.com/apna_gyan_niketan/?hl=en"target="_blank" class="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center hover:bg-secondary hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-instagram text-white"></i>
+                        </a>
+                       
+                    </div>
+                </div>
+               
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="about.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">About Us</a></li>
+                        <li><a href="facilities.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Facilities</a></li>
+                        <li><a href="admissions.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Admissions</a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Contact</a></li>
+                         
+                    </ul>
+                </div>
+               
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Academics</h3>
+                    <ul class="space-y-3">
+                        <li><a href="academics.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Primary School</a></li>
+                        <li><a href="academics.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Middle School</a></li>
+                        <li><a href="academics.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">High School</a></li>
+                        <li><a href="academics.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Extra Curricular</a></li>
+                    </ul>
+                </div>
+               
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Contact Info</h3>
+                    <div class="space-y-3 text-gray-300">
+                        <p class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-3 text-secondary"></i>
+                            Vitthal Complex, Ranjan path,Gola Road
+(Danapur Cantt.), Patna – 801503.
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-phone mr-3 text-secondary"></i>
+                            06115 – 235117, 235525
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-secondary"></i>
+                            gnspatna@rediffmail.com
+                        </p>
+                    </div>
+                </div>
+            </div>
+           
+            <!-- Mobile App Download Section -->
+            <div class="border-t border-white/20 pt-8 mb-8">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold text-white mb-4">Download Our Mobile App</h3>
+                    <p class="text-gray-300 mb-6">Stay connected with Gyan Niketan on the go! Download our official mobile app for easy access to school updates, notifications, and more.</p>
+                    <a href="https://play.google.com/store/apps/details?id=parentsalarm.gyan.niketan.group.of.schools.patna.bihar&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg">
+                        <svg class="w-8 h-8 mr-3" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                        </svg>
+                        <div class="text-left">
+                            <div class="text-xs text-gray-600">GET IT ON</div>
+                            <div class="text-sm font-semibold">Google Play</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+           
+            <div class="border-t border-white/20 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 Gyan Niketan. All rights reserved. | Excellence in Education</p>
+            </div>
+        </div>
+    </footer>
+
+    <link rel="stylesheet" href="chat.css">
+    <body id="chatbot-body">
+      <!-- Chatbot Toggler -->
+      <button id="chatbot-toggler">
+        <span class="material-symbols-rounded">mode_comment</span>
+        <span class="material-symbols-rounded">close</span>
+      </button>
+      <div class="chatbot-popup">
+        <!-- Chatbot Header -->
+        <div class="chat-header">
+          <div class="header-info">
+            <svg class="chatbot-logo" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 1024 1024">
+              <path
+                d="M738.3 287.6H285.7c-59 0-106.8 47.8-106.8 106.8v303.1c0 59 47.8 106.8 106.8 106.8h81.5v111.1c0 .7.8 1.1 1.4.7l166.9-110.6 41.8-.8h117.4l43.6-.4c59 0 106.8-47.8 106.8-106.8V394.5c0-59-47.8-106.9-106.8-106.9zM351.7 448.2c0-29.5 23.9-53.5 53.5-53.5s53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5-53.5-23.9-53.5-53.5zm157.9 267.1c-67.8 0-123.8-47.5-132.3-109h264.6c-8.6 61.5-64.5 109-132.3 109zm110-213.7c-29.5 0-53.5-23.9-53.5-53.5s23.9-53.5 53.5-53.5 53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5zM867.2 644.5V453.1h26.5c19.4 0 35.1 15.7 35.1 35.1v121.1c0 19.4-15.7 35.1-35.1 35.1h-26.5zM95.2 609.4V488.2c0-19.4 15.7-35.1 35.1-35.1h26.5v191.3h-26.5c-19.4 0-35.1-15.7-35.1-35.1zM561.5 149.6c0 23.4-15.6 43.3-36.9 49.7v44.9h-30v-44.9c-21.4-6.5-36.9-26.3-36.9-49.7 0-28.6 23.3-51.9 51.9-51.9s51.9 23.3 51.9 51.9z"
+              />
+            </svg>
+            <h2 class="logo-text">Gyanis AI</h2>
+          </div>
+          <button id="close-chatbot" class="material-symbols-rounded">keyboard_arrow_down</button>
+        </div>
+        <!-- Chatbot Body -->
+        <div class="chat-body">
+          <div class="message bot-message">
+            <svg class="bot-avatar" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 1024 1024">
+              <path
+                d="M738.3 287.6H285.7c-59 0-106.8 47.8-106.8 106.8v303.1c0 59 47.8 106.8 106.8 106.8h81.5v111.1c0 .7.8 1.1 1.4.7l166.9-110.6 41.8-.8h117.4l43.6-.4c59 0 106.8-47.8 106.8-106.8V394.5c0-59-47.8-106.9-106.8-106.9zM351.7 448.2c0-29.5 23.9-53.5 53.5-53.5s53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5-53.5-23.9-53.5-53.5zm157.9 267.1c-67.8 0-123.8-47.5-132.3-109h264.6c-8.6 61.5-64.5 109-132.3 109zm110-213.7c-29.5 0-53.5-23.9-53.5-53.5s23.9-53.5 53.5-53.5 53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5zM867.2 644.5V453.1h26.5c19.4 0 35.1 15.7 35.1 35.1v121.1c0 19.4-15.7 35.1-35.1 35.1h-26.5zM95.2 609.4V488.2c0-19.4 15.7-35.1 35.1-35.1h26.5v191.3h-26.5c-19.4 0-35.1-15.7-35.1-35.1zM561.5 149.6c0 23.4-15.6 43.3-36.9 49.7v44.9h-30v-44.9c-21.4-6.5-36.9-26.3-36.9-49.7 0-28.6 23.3-51.9 51.9-51.9s51.9 23.3 51.9 51.9z"
+              />
+            </svg>
+            <!-- prettier-ignore -->
+            <div class="message-text"> Hey there  <br /> How can I help you today? </div>
+          </div>
+        </div>
+        <!-- Chatbot Footer -->
+        <div class="chat-footer">
+          <form action="#" class="chat-form">
+            <textarea placeholder="Message..." class="message-input" required></textarea>
+            <div class="chat-controls">
+              <button type="button" id="emoji-picker" class="material-symbols-outlined">sentiment_satisfied</button>
+              <div class="file-upload-wrapper">
+                <input type="file" accept="image/*" id="file-input" hidden />
+                <img src="#" />
+                <button type="button" id="file-upload" class="material-symbols-rounded">attach_file</button>
+                <button type="button" id="file-cancel" class="material-symbols-rounded">close</button>
+              </div>
+              <button type="submit" id="send-message" class="material-symbols-rounded">arrow_upward</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- Linking Emoji Mart script for emoji picker -->
+      <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
+      <!-- Linking custom script -->
+  <script src="chat.js"></Script>
+<script>
+    // Throttle scroll events (example)
+let lastScroll = 0;
+window.addEventListener("scroll", function() {
+  const now = Date.now();
+  if (now - lastScroll > 50) { // Only every 50ms
+    // Apply your scroll animations here
+    lastScroll = now;
+  }
+});
+
+</script>
+ <script>     
+    // Enhanced Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.style.transform = 'translateY(0)';
+                navbar.style.opacity = '0.95';
+                navbar.querySelector('.bg-white\\/95').classList.add('shadow-xl');
+            } else {
+                navbar.style.transform = 'translateY(0)';
+                navbar.style.opacity = '1';
+                navbar.querySelector('.bg-white\\/95').classList.remove('shadow-xl');
+            }
+        });
+
+        // Enhanced hover effects for navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+           
+            link.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Sub navbar functionality - show/hide on About click
+        const subNavbar = document.getElementById('sub-navbar');
+        const aboutLink = document.querySelector('a[href="about.html"]');
+       
+        aboutLink.addEventListener('click', function(e) {
+            e.preventDefault();
+           
+            if (subNavbar.classList.contains('hidden')) {
+                // Show sub navbar
+                subNavbar.classList.remove('hidden');
+                setTimeout(() => {
+                    subNavbar.style.opacity = '1';
+                    subNavbar.style.transform = 'translateY(0)';
+                }, 10);
+            } else {
+                // Hide sub navbar
+                subNavbar.style.opacity = '0';
+                subNavbar.style.transform = 'translateY(-4px)';
+                setTimeout(() => {
+                    subNavbar.classList.add('hidden');
+                }, 300);
+            }
+        });
+
+        // Hide sub navbar when clicking on other nav links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            if (link.getAttribute('href') !== 'about.html') {
+                link.addEventListener('click', function() {
+                    subNavbar.style.opacity = '0';
+                    subNavbar.style.transform = 'translateY(-4px)';
+                    setTimeout(() => {
+                        subNavbar.classList.add('hidden');
+                    }, 300);
+                });
+            }
+        });
+
+        // Enhanced mobile menu with slide animation
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        const mobileMoreLink = document.getElementById('mobile-more-link');
+        const mobileMoreSubmenu = document.getElementById('mobile-more-submenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+           
+            if (navMenu.classList.contains('hidden')) {
+                navMenu.classList.remove('hidden');
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    navMenu.style.opacity = '1';
+                    navMenu.style.transform = 'translateY(0)';
+                }, 10);
+            } else {
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    navMenu.classList.add('hidden');
+                }, 300);
+            }
+           
+            // Animate hamburger menu
+            const spans = mobileMenuBtn.querySelectorAll('span');
+            if (mobileMenuBtn.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        // Mobile: toggle More submenu
+        if (mobileMoreLink && mobileMoreSubmenu) {
+            mobileMoreLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                mobileMoreSubmenu.classList.toggle('hidden');
+                const icon = mobileMoreLink.querySelector('.material-symbols-rounded');
+                if (icon) {
+                    icon.textContent = mobileMoreSubmenu.classList.contains('hidden') ? 'expand_more' : 'expand_less';
+                }
+            });
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                // Special handling for About link in mobile menu
+                if (link.getAttribute('href') === 'about.html') {
+                    // Don't close mobile menu for About link, let it handle sub navbar
+                    return;
+                }
+                // Keep menu open when toggling More submenu
+                if (link.id === 'mobile-more-link') {
+                    return;
+                }
+               
+                mobileMenuBtn.classList.remove('active');
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    navMenu.classList.add('hidden');
+                }, 300);
+               
+                // Reset hamburger menu
+                const spans = mobileMenuBtn.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+               
+                // Hide sub navbar when clicking other links
+                subNavbar.style.opacity = '0';
+                subNavbar.style.transform = 'translateY(-4px)';
+                setTimeout(() => {
+                    subNavbar.classList.add('hidden');
+                }, 300);
+            });
+        });
+
+        // Handle About link in mobile menu
+        const mobileAboutLink = document.querySelector('#nav-menu a[href="about.html"]');
+        if (mobileAboutLink) {
+            mobileAboutLink.addEventListener('click', function(e) {
+                e.preventDefault();
+               
+                // Close the main mobile menu first
+                mobileMenuBtn.classList.remove('active');
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    navMenu.classList.add('hidden');
+                }, 300);
+               
+                // Reset hamburger menu
+                const spans = mobileMenuBtn.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+               
+                if (subNavbar.classList.contains('hidden')) {
+                    // Show sub navbar
+                    subNavbar.classList.remove('hidden');
+                    setTimeout(() => {
+                        subNavbar.style.opacity = '1';
+                        subNavbar.style.transform = 'translateY(0)';
+                    }, 10);
+                } else {
+                    // Hide sub navbar
+                    subNavbar.style.opacity = '0';
+                    subNavbar.style.transform = 'translateY(-4px)';
+                    setTimeout(() => {
+                        subNavbar.classList.add('hidden');
+                    }, 300);
+                }
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent);
+                const increment = target / 100;
+                let current = 0;
+               
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.ceil(current) + '+';
+                        setTimeout(updateCounter, 20);
+                    } else {
+                        counter.textContent = target + '+';
+                    }
+                };
+               
+                updateCounter();
+            });
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                   
+                    // Trigger counter animation for about section
+                    if (entry.target.id === 'about') {
+                        animateCounters();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for animations
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 0.8s ease-out';
+            observer.observe(section);
+        });
+
+        // Magnetic hover effect
+        document.querySelectorAll('.magnetic-hover').forEach(element => {
+            element.addEventListener('mousemove', (e) => {
+                const rect = element.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+               
+                element.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(1.05)`;
+            });
+           
+            element.addEventListener('mouseleave', () => {
+                element.style.transform = 'translate(0, 0) scale(1)';
+            });
+        });
+
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.floating-element');
+           
+            parallaxElements.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1);
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // 3D tilt interaction for logo
+        (function() {
+            const logo = document.getElementById('site-logo');
+            if (!logo) return;
+            const maxTilt = 12; // degrees
+            const scale = 1.04;
+            const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+            if (!isFinePointer) return; // skip on touch
+
+            const handleMove = (e) => {
+                const rect = logo.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const pctX = (x / rect.width) * 2 - 1; // -1 to 1
+                const pctY = (y / rect.height) * 2 - 1; // -1 to 1
+                const rotateY = pctX * maxTilt;
+                const rotateX = -pctY * maxTilt;
+                logo.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
+            };
+
+            const reset = () => {
+                logo.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+            };
+
+            logo.addEventListener('mousemove', handleMove);
+            logo.addEventListener('mouseleave', reset);
+        })();
+
+        // Video Modal Functionality
+        const videoModal = document.getElementById('video-modal');
+        const campusVideoBtn = document.getElementById('campus-video-btn');
+        const closeVideoModal = document.getElementById('close-video-modal');
+        const campusVideo = document.getElementById('campus-video');
+        const videoPlaceholder = document.getElementById('video-placeholder');
+
+        // Open video modal
+        campusVideoBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            videoModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+           
+            // Check if video file exists
+            const videoSrc = 'gns.mp4';
+            fetch(videoSrc, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        // Video file exists, show video player
+                        campusVideo.style.display = 'block';
+                        videoPlaceholder.style.display = 'none';
+                        campusVideo.src = videoSrc;
+                    } else {
+                        // Video file doesn't exist, show placeholder
+                        campusVideo.style.display = 'none';
+                        videoPlaceholder.style.display = 'flex';
+                    }
+                })
+                .catch(() => {
+                    // Error fetching video, show placeholder
+                    campusVideo.style.display = 'none';
+                    videoPlaceholder.style.display = 'flex';
+                });
+        });
+
+        // Close video modal
+        closeVideoModal.addEventListener('click', function() {
+            videoModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            // Pause video when closing
+            if (campusVideo.src) {
+                campusVideo.pause();
+            }
+        });
+
+        // Close modal when clicking outside
+        videoModal.addEventListener('click', function(e) {
+            if (e.target === videoModal) {
+                videoModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+                if (campusVideo.src) {
+                    campusVideo.pause();
+                }
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
+                videoModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+                if (campusVideo.src) {
+                    campusVideo.pause();
+                }
+            }
+        });
+    </script>
+   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const chatBody = document.querySelector(".chat-body");
+      let autoScrollEnabled = true; // default locked to bottom
+   
+      // Auto-scroll function
+      function autoScroll() {
+        if (autoScrollEnabled) {
+          chatBody.scrollTo({
+            top: chatBody.scrollHeight,
+            behavior: "smooth"
+          });
+        }
+      }
+   
+      // Detect if user scrolls away from bottom
+      chatBody.addEventListener("scroll", () => {
+        const atBottom =
+          chatBody.scrollHeight - chatBody.scrollTop <= chatBody.clientHeight + 10;
+        autoScrollEnabled = atBottom; // only enable if near bottom
+      });
+   
+      // Watch for new messages
+      const observer = new MutationObserver(autoScroll);
+      observer.observe(chatBody, { childList: true, subtree: true });
+   
+      // Scroll when chatbot is opened
+      document.querySelector("#chatbot-toggler").addEventListener("click", () => {
+        setTimeout(autoScroll, 100);
+      });
+    });
+        </script>
+
+
+</body>
+</html>
