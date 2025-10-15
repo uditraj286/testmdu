@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="nav.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+     <link href="logo.png" rel="icon">
+      <script src="protect.js"></script>
+          <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#f59e0b',
+                        accent: '#3b82f6',
+                        glass: 'rgba(255, 255, 255, 0.1)',
+                        glassDark: 'rgba(15, 23, 42, 0.8)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-down': 'slideDown 0.8s ease-out',
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'scale-in': 'scaleIn 0.6s ease-out',
+                        'rotate-in': 'rotateIn 0.8s ease-out',
+                        'bounce-in': 'bounceIn 1s ease-out',
+                        'liquid': 'liquid 3s ease-in-out infinite',
+                        'shimmer': 'shimmer 2s linear infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    backdropBlur: {
+                        'xs': '2px',
+                    }
+                }
+            }
+        }
+    </script>
+  <title>Gyan Niketan School - Photo Gallery</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: "Inter", "Segoe UI", sans-serif;
+      background: #fefefe;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* === SCHOOL HERO SECTION === */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      background: linear-gradient(135deg, #fff8e1 0%, #fffde7 50%, #f3e5f5 100%);
+    }
+
+    .hero-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    /* Left side - School content */
+    .hero-content {
+      z-index: 2;
+    }
+
+    .school-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #f59e0b, #f59e0b);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 25px;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero-content h1 {
+      font-size: 4.2rem;
+      font-weight: 800;
+      line-height: 1.1;
+      color: #2C2D2D;
+      margin-bottom: 25px;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.4s forwards;
+    }
+
+    .school-name {
+      color: #f59e0b;
+    }
+
+    .hero-content .description {
+      font-size: 1.2rem;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 35px;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.6s forwards;
+    }
+
+    .school-stats {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.8s forwards;
+    }
+
+    .stat-item {
+      text-align: left;
+    }
+
+    .stat-number {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #f59e0b;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #666;
+      font-weight: 500;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 20px;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 1s forwards;
+    }
+
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, #f59e0b, #f59e0b);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(25,118,210,0.3);
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(25,118,210,0.4);
+    }
+
+    .secondary-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 24px;
+      background: transparent;
+      color: #1976d2;
+      text-decoration: none;
+      border: 2px solid #f59e0b;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .secondary-btn:hover {
+      background: #f59e0b;
+      color: white;
+    }
+
+    /* Right side - School gallery */
+    .hero-gallery {
+      position: relative;
+      height: 650px;
+      perspective: 1000px;
+    }
+
+    .gallery-main {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.15);
+      border: 4px solid white;
+    }
+
+    .gallery-slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: scale(1.1);
+    }
+
+    .gallery-slide.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .gallery-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slide-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      color: white;
+      padding: 30px;
+      text-align: left;
+    }
+
+    .slide-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .slide-desc {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    /* Floating thumbnail indicators */
+    .gallery-thumbs {
+      position: absolute;
+      right: -70px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .thumb-item {
+      width: 90px;
+      height: 70px;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.3s ease;
+      opacity: 0.6;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .thumb-item.active {
+      border-color: #f59e0b;
+      opacity: 1;
+      transform: scale(1.1);
+      box-shadow: 0 8px 25px rgba(25,118,210,0.3);
+    }
+
+    .thumb-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Slide counter */
+    .slide-counter {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-weight: 700;
+      color: #f59e0b;
+      font-size: 0.9rem;
+    }
+
+    /* Navigation arrows */
+    .gallery-nav {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .nav-arrow {
+      width: 50px;
+      height: 50px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #1976d2;
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+
+    .nav-arrow:hover {
+      background: #f59e0b;
+      color: white;
+      transform: scale(1.1);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* === MAIN GALLERY SECTION === */
+    .main-gallery {
+      padding: 100px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+    }
+
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .gallery-title {
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+    }
+
+    .gallery-subtitle {
+      font-size: 1.2rem;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Filter tabs */
+    .filter-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+
+    .filter-tab {
+      padding: 14px 28px;
+      background: white;
+      border: 2px solid #e0e0e0;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #666;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .filter-tab.active,
+    .filter-tab:hover {
+      background: #f59e0b;
+      border-color: #f59e0b;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(25,118,210,0.3);
+    }
+
+    /* Gallery grid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 30px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      background: white;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: itemAppear 0.6s ease forwards;
+    }
+
+    .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+    .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+    .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+    .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+    .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+    .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+
+    @keyframes itemAppear {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .item-info {
+      padding: 28px;
+    }
+
+    .item-category {
+      display: inline-block;
+      background: #e3f2fd;
+      color: #f59e0b;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .item-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+    }
+
+    .item-description {
+      color: #666;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Modal for full-size images */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.active { display: flex; }
+
+    .modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    .modal img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #f59e0b;
+      color: white;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Responsive design */
+    @media (max-width: 1024px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        text-align: center;
+      }
+      
+      .hero-content h1 {
+        font-size: 3.5rem;
+      }
+      
+      .gallery-thumbs {
+        display: none;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-container {
+        padding: 0 20px;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.8rem;
+      }
+      
+      .hero-gallery {
+        height: 400px;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .school-stats {
+        gap: 20px;
+      }
+
+      .stat-number {
+        font-size: 2.2rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    .school-badge {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .school-badge {
+    display: inline-block; /* or block/flex as needed */
+  }
+}
+
+  </style>
+  
+</head>
+<body>
+    
+        <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500">
+       
+        <div class="bg-white/95 backdrop-blur-md shadow-lg mx-4 mt-4 mb-4 rounded-2xl border border-gray-200/50">
+            <div class="max-w-7xl mx-auto px-6 py-4">
+                <div class="flex justify-between items-center">
+                  <!-- Logo -->
+                  <!-- Logo -->
+                    <a href="index.html" class="flex items-center space-x-3 group">
+                        <div id="site-logo" class="relative logo-tilt">
+                            <img src="logo.png" alt="Gyan Niketan" class="h-12 w-12 rounded-xl object-cover shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-r from-secondary to-orange-500 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold gradient-text">Gyan Niketan</h1>
+                            <p class="text-xs text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">सत्वात संजायते ज्ञानम्</p>
+                        </div>
+                    </a>
+                   
+                    <ul class="hidden lg:flex space-x-8 items-center">
+                        <li><a href="index.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Home</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="about.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">About</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                       
+                        <li><a href="academics.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Academics</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="admissions.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Admissions</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="alumni.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Alumni</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                        <li><a href="contact.html" class="nav-link relative group">
+                            <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">Contact</span>
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a></li>
+                              <li class="relative group">
+                            <a href="#" class="nav-link relative" id="more-link" aria-haspopup="true" aria-expanded="false">
+                                <span class="text-gray-700 hover:text-secondary transition-colors duration-300 font-medium">More</span>
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <ul class="absolute right-0 mt-3 w-56 bg-white/95 backdrop-blur-md shadow-xl rounded-xl border border-gray-200/70 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                                <li>
+                                    <a href="https://www.cbse.gov.in/"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary rounded-t-xl">CBSE</a>
+                                </li>
+                                <li>
+                                    <a href="https://ncert.nic.in/" target="_blank" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">NCERT</a>
+                                </li>
+                                 <li>
+                                    <a href="developers.html" target="_blank" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Developers</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="career.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Career</a>
+                                </li>
+                                 <li>
+                                    <a href="council.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Council</a>
+                                </li>
+                                  <li>
+                                    <a href="activities.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Activity</a>
+                                </li>
+                                <li>
+                                    <a href="hostel.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary">Hostel Life</a>
+                                </li>
+                                <li>
+                                    <a href="mandatorydisclosure.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary rounded-b-xl">Mandatory Disclosure</a>
+                                </li>
+                                 <li>
+                                    <a href="Pedagogical Planner.html"target="_blank"  class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-secondary rounded-b-xl">Pedagogical Planner</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li>
+                            <a href="https://student.schoolcanvas.com/" target="_blank" rel="noopener noreferrer">
+                                <button class="bg-gradient-to-r from-secondary to-orange-500 text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 glow-on-hover">
+                                    Student Login
+                                </button>
+                            </a>
+                           
+                           
+                        </li>
+                    </ul>
+                   
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="lg:hidden flex flex-col space-y-1 p-2 group">
+                        <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 group-hover:bg-secondary"></span>
+                        <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 group-hover:bg-secondary"></span>
+                        <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 group-hover:bg-secondary"></span>
+                    </button>
+                </div>
+               
+                <!-- Mobile Menu -->
+                <ul id="nav-menu" class="lg:hidden hidden mt-4 space-y-4 border-t border-gray-200 pt-4 transition-all duration-300">
+                    <li><a href="index.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Home</a></li>
+                    <li><a href="about.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">About</a></li>
+                    <li><a href="facilities.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Facilities</a></li>
+                    <li><a href="admissions.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Admissions</a></li>
+                    <li><a href="alumni.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Alumni</a></li>
+                    <li><a href="contact.html" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Contact</a></li>
+                     <li>
+                        <a href="#" id="mobile-more-link" class="flex items-center justify-between text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">
+                            <span>More</span>
+                            <span class="material-symbols-rounded text-base">expand_more</span>
+                        </a>
+                        <ul id="mobile-more-submenu" class="hidden mt-1 ml-2 space-y-1">
+                            <li><a href="https://www.cbse.gov.in/"target="_blank"  class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">CBSE</a></li>
+                            <li><a href="https://ncert.nic.in/" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">NCERT</a></li>
+                         <li><a href="developers.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Developers</a></li>
+                            <li><a href="career.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Career</a></li>
+                        <li><a href="council.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Council</a></li>
+                        <li><a href="activities.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Activity</a></li>
+                        <li><a href="hostel.html" target="_blank" class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Hostel Life</a></li>
+
+                            <li><a href="mandatorydisclosure.html"  class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Mandatory Disclosure</a></li>
+                               <li><a href="Pedagogical Planner.html"  class="block text-gray-700 hover:text-secondary font-medium transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-gray-50">Pedagogical Planner</a></li>
+                        </ul>
+                    </li>
+                   
+                    <li class="pt-2">
+                        <a href="https://student.schoolcanvas.com/" target="_blank" rel="noopener noreferrer">
+                            <button class="bg-gradient-to-r from-secondary to-orange-500 text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 glow-on-hover">
+                                Student Login
+                            </button>
+                        </a>
+                       
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sub Navigation Bar -->
+    <nav id="sub-navbar" class="fixed top-24 w-full z-40 transition-all duration-500 bg-white/5 backdrop-blur-lg hidden opacity-0 transform -translate-y-4">
+        <div class="max-w-7xl mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Quick Links -->
+                <div class="hidden lg:flex space-x-6 items-center">
+                    <a href="about.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-info-circle text-xs"></i>
+                        <span>About Us</span>
+                    </a>
+                    <a href="vision.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-eye text-xs"></i>
+                        <span>Vision</span>
+                    </a>
+                    <a href="news.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-newspaper text-xs"></i>
+                        <span>News & Events</span>
+                    </a>
+                    <a href="Academics Calendar.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-calendar-alt text-xs"></i>
+                        <span>Academic Calendar</span>
+                    </a>
+                    <a href="facilities.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-building text-xs"></i>
+                        <span>Facilities</span>
+                    </a>
+                    <a href="faculty.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-chalkboard-teacher text-xs"></i>
+                        <span>Faculty</span>
+                    </a>
+                    <a href="deskmessages.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-comments text-xs"></i>
+                        <span>Desk Messages</span>
+                    </a>
+                    <a href="gallery.html" class="text-sm text-gray-600 hover:text-secondary transition-colors duration-300 font-medium flex items-center space-x-1">
+                        <i class="fas fa-images text-xs"></i>
+                        <span>Gallery</span>
+                    </a>
+                    
+                </div>
+
+             
+
+            <!-- Mobile Sub Menu -->
+            <div class="lg:hidden mt-3 pt-3 border-t border-white/20">
+                <div class="flex flex-wrap gap-2">
+                    <a href="about.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-info-circle mr-1"></i>About Us
+                    </a>
+                    <a href="vision.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-eye mr-1"></i>Vision
+                    </a>
+                    <a href="news.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-newspaper mr-1"></i>News & Events
+                    </a>
+                    <a href="Academics Calendar.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-calendar-alt mr-1"></i>Calendar
+                    </a>
+                    <a href="facilities.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-building mr-1"></i>Facilities
+                    </a>
+                    <a href="faculty.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-chalkboard-teacher mr-1"></i>Faculty
+                    </a>
+                    <a href="deskmessages.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-comments mr-1"></i>Desk Messages
+                    </a>
+                    <a href="gallery.html" class="text-xs text-gray-600 hover:text-secondary transition-colors duration-300 bg-white/10 px-3 py-1 rounded-full">
+                        <i class="fas fa-images mr-1"></i>Gallery
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    
+</div>
+<br>
+<br>
+<br>
+<br>
+
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="hero-container">
+      <!-- Left side - School content -->
+      <div class="hero-content">
+        <div class="school-badge">
+          🏫 CBSE Affiliated School
+        </div>
+        <h1><span class="school-name">Gyan Niketan</span><br>School Gallery</h1>
+        <p class="description">
+          Explore the vibrant life at Gyan Niketan School through our comprehensive photo gallery. From academic excellence to extracurricular achievements, witness the journey of our students as they grow, learn, and excel.
+        </p>
+        
+        <div class="school-stats">
+          <div class="stat-item">
+            <span class="stat-number">4000+</span>
+            <span class="stat-label">Happy Students</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">School Events</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">39+</span>
+            <span class="stat-label">Years Excellence</span>
+          </div>
+        </div>
+        
+        <div class="hero-actions">
+          <a href="#gallery" class="primary-btn">
+            Explore Gallery
+            <span>📸</span>
+          </a>
+          <a href="about.html" class="secondary-btn">
+            ℹ️ About Us
+          </a>
+        </div>
+      </div>
+
+      <!-- Right side - School gallery slideshow -->
+      <div class="hero-gallery">
+        <div class="gallery-main">
+          <div class="gallery-slide active">
+            <img src="DSC09513.JPG" alt="Annual Function">
+            <div class="slide-overlay">
+              <div class="slide-title">Republic Day Celebration</div>
+              <div class="slide-desc">Students showcasing their talents in our grand annual function</div>
+            </div>
+          </div>
+          <div class="gallery-slide">
+            <img src="DSC09107.JPG" alt="Sports Day">
+            <div class="slide-overlay">
+              <div class="slide-title">Sports Day Championship</div>
+              <div class="slide-desc">Athletic excellence and sportsmanship in action</div>
+            </div>
+          </div>
+          <div class="gallery-slide">
+            <img src="DSC09205.JPG" alt="Cultural Event">
+            <div class="slide-overlay">
+              <div class="slide-title">Cultural Fest</div>
+              <div class="slide-desc">Celebrating diversity through music, dance, and art</div>
+            </div>
+          </div>
+          <div class="gallery-slide">
+            <img src="DSC09349.JPG" alt="Science Fair">
+            <div class="slide-overlay">
+              <div class="slide-title">Science Exhibition</div>
+              <div class="slide-desc">Young minds exploring the wonders of science and innovation</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thumbnail navigation -->
+        <div class="gallery-thumbs">
+          <div class="thumb-item active" onclick="showSlide(0)">
+            <img src="DSC09513.JPG" alt="">
+          </div>
+          <div class="thumb-item" onclick="showSlide(1)">
+            <img src="DSC09107.JPG" alt="">
+          </div>
+          <div class="thumb-item" onclick="showSlide(2)">
+            <img src="DSC09205.JPG" alt="">
+          </div>
+          <div class="thumb-item" onclick="showSlide(3)">
+            <img src="DSC09349.JPG" alt="">
+          </div>
+        </div>
+
+        <!-- Slide counter -->
+        <div class="slide-counter">
+          <span id="current-slide">01</span> of <span id="total-slides">04</span>
+        </div>
+
+        <!-- Navigation arrows -->
+        <div class="gallery-nav">
+          <button class="nav-arrow" onclick="previousSlide()">‹</button>
+          <button class="nav-arrow" onclick="nextSlide()">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN GALLERY SECTION -->
+  <section class="main-gallery" id="gallery">
+    <div class="gallery-header">
+      <h2 class="gallery-title">School Life Moments</h2>
+      <p class="gallery-subtitle">Browse through our collection of memorable moments, achievements, and celebrations that define the Gyan Niketan experience</p>
+    </div>
+
+    <!-- Filter tabs -->
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterGallery('all')">All Photos</button>
+      <button class="filter-tab" onclick="filterGallery('events')">School Events</button>
+      <button class="filter-tab" onclick="filterGallery('sports')">Sports & Games</button>
+      <button class="filter-tab" onclick="filterGallery('cultural')">Cultural Activities</button>
+      <button class="filter-tab" onclick="filterGallery('academics')">Academic Life</button>
+    </div>
+
+    <!-- Gallery grid -->
+    <div class="gallery-grid">
+      <div class="gallery-item" data-category="events">
+        <img src="DSC09248.JPG" alt="Annual Function">
+        <div class="item-info">
+          <span class="item-category">School Events</span>
+          <h3 class="item-title">Annual Exhibition 2024</h3>
+          <p class="item-description">Students present their innovative projects to guests during the school’s Annual Exhibition, showcasing creativity, curiosity, and teamwork.</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-category="cultural" >
+        <img src="DSC09513.JPG" alt="Republic Day">
+        <div class="item-info">
+          <span class="item-category">Cultural</span>
+          <h3 class="item-title">Republic Day 2025</h3>
+          <p class="item-description">Republic Day: The Tricolor unfurled with petals and pride in the school courtyard.</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-category="cultural">
+        <img src="DSC09507.JPG" alt="Cultural Event">
+        <div class="item-info">
+          <span class="item-category">Cultural</span>
+          <h3 class="item-title">NCC Cadets</h3>
+          <p class="item-description">NCC cadets in uniform stand in formation during a school parade, with the lead cadet front and center and colorful sashes and plumes adding ceremony to the courtyard scene.</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-category="event">
+        <img src="t.webp" alt="Teacher's Day">
+        <div class="item-info">
+          <span class="item-category">Event</span>
+          <h3 class="item-title">Teacher's Day</h3>
+          <p class="item-description">Gyan Niketan School celebrates Teacher’s Day with grace and gratitude—our educators honored on stage, smiling with bouquets and awards.</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-category="cultural">
+        <img src="a.jpg" alt="awards">
+        <div class="item-info">
+          <span class="item-category">Cultural</span>
+          <h3 class="item-title">Gyan Niketan wins The Hindu–SBI Quiz</h3>
+          <p class="item-description">Gyan Niketan wins The Hindu–SBI Inter-School Quiz at CMI, topping a field of 160 schools.</p>
+        </div>
+      </div>
+      
+      <div class="gallery-item" data-category="events">
+        <img src="tree.webp" alt="School event">
+        <div class="item-info">
+          <span class="item-category">Event</span>
+          <h3 class="item-title">Sapling Smiles at Gyan Niketan</h3>
+          <p class="item-description">Green future in the making: Gyan Niketan students proudly plant saplings together.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <img id="modal-img" src="" alt="">
+    </div>
+  </div>
+
+
+
+  
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16 relative mt-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold gradient-text mb-6">Gyan Niketan</h3>
+                    <p class="text-gray-300 leading-relaxed mb-6">To serve a very lagging and visible need of the city and its surrounding with an institution which, besides giving the children the best education, cares for all round development physical, mental and spiritual and inculcates in them a deep love for high moral values and due respect for all religion.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/gyanniketanpatna/" target="_blank"class="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center hover:bg-secondary hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-facebook-f text-white"></i>
+                        </a>
+                       
+                        <a href="https://www.instagram.com/apna_gyan_niketan/?hl=en"target="_blank" class="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center hover:bg-secondary hover:scale-110 transition-all duration-300">
+                            <i class="fab fa-instagram text-white"></i>
+                        </a>
+                       
+                    </div>
+                </div>
+               
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="about.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">About Us</a></li>
+                        <li><a href="facilities.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Facilities</a></li>
+                        <li><a href="admissions.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Admissions</a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Contact</a></li>
+                         
+                    </ul>
+                </div>
+               
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Academics</h3>
+                    <ul class="space-y-3">
+                        <li><a href="academics.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Primary School</a></li>
+                        <li><a href="academics.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Middle School</a></li>
+                        <li><a href="academics.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">High School</a></li>
+                        <li><a href="academics.html" class="text-gray-300 hover:text-secondary transition-colors duration-300">Extra Curricular</a></li>
+                    </ul>
+                </div>
+               
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Contact Info</h3>
+                    <div class="space-y-3 text-gray-300">
+                        <p class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-3 text-secondary"></i>
+                            Vitthal Complex, Ranjan path,Gola Road
+(Danapur Cantt.), Patna – 801503.
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-phone mr-3 text-secondary"></i>
+                            06115 – 235117, 235525
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-secondary"></i>
+                            gnspatna@rediffmail.com
+                        </p>
+                    </div>
+                </div>
+            </div>
+           
+            <!-- Mobile App Download Section -->
+            <div class="border-t border-white/20 pt-8 mb-8">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold text-white mb-4">Download Our Mobile App</h3>
+                    <p class="text-gray-300 mb-6">Stay connected with Gyan Niketan on the go! Download our official mobile app for easy access to school updates, notifications, and more.</p>
+                    <a href="https://play.google.com/store/apps/details?id=parentsalarm.gyan.niketan.group.of.schools.patna.bihar&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg">
+                        <svg class="w-8 h-8 mr-3" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                        </svg>
+                        <div class="text-left">
+                            <div class="text-xs text-gray-600">GET IT ON</div>
+                            <div class="text-sm font-semibold">Google Play</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+           
+            <div class="border-t border-white/20 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 Gyan Niketan. All rights reserved. | Excellence in Education</p>
+            </div>
+        </div>
+    </footer>
+  <link rel="stylesheet" href="chat.css">
+  <body id="chatbot-body">
+    <!-- Chatbot Toggler -->
+    <button id="chatbot-toggler">
+      <span class="material-symbols-rounded">mode_comment</span>
+      <span class="material-symbols-rounded">close</span>
+    </button>
+    <div class="chatbot-popup">
+      <!-- Chatbot Header -->
+      <div class="chat-header">
+        <div class="header-info">
+          <svg class="chatbot-logo" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 1024 1024">
+            <path
+              d="M738.3 287.6H285.7c-59 0-106.8 47.8-106.8 106.8v303.1c0 59 47.8 106.8 106.8 106.8h81.5v111.1c0 .7.8 1.1 1.4.7l166.9-110.6 41.8-.8h117.4l43.6-.4c59 0 106.8-47.8 106.8-106.8V394.5c0-59-47.8-106.9-106.8-106.9zM351.7 448.2c0-29.5 23.9-53.5 53.5-53.5s53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5-53.5-23.9-53.5-53.5zm157.9 267.1c-67.8 0-123.8-47.5-132.3-109h264.6c-8.6 61.5-64.5 109-132.3 109zm110-213.7c-29.5 0-53.5-23.9-53.5-53.5s23.9-53.5 53.5-53.5 53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5zM867.2 644.5V453.1h26.5c19.4 0 35.1 15.7 35.1 35.1v121.1c0 19.4-15.7 35.1-35.1 35.1h-26.5zM95.2 609.4V488.2c0-19.4 15.7-35.1 35.1-35.1h26.5v191.3h-26.5c-19.4 0-35.1-15.7-35.1-35.1zM561.5 149.6c0 23.4-15.6 43.3-36.9 49.7v44.9h-30v-44.9c-21.4-6.5-36.9-26.3-36.9-49.7 0-28.6 23.3-51.9 51.9-51.9s51.9 23.3 51.9 51.9z"
+            />
+          </svg>
+          <h2 class="logo-text">Gyanis AI</h2>
+        </div>
+        <button id="close-chatbot" class="material-symbols-rounded">keyboard_arrow_down</button>
+      </div>
+      <!-- Chatbot Body -->
+      <div class="chat-body">
+        <div class="message bot-message">
+          <svg class="bot-avatar" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 1024 1024">
+            <path
+              d="M738.3 287.6H285.7c-59 0-106.8 47.8-106.8 106.8v303.1c0 59 47.8 106.8 106.8 106.8h81.5v111.1c0 .7.8 1.1 1.4.7l166.9-110.6 41.8-.8h117.4l43.6-.4c59 0 106.8-47.8 106.8-106.8V394.5c0-59-47.8-106.9-106.8-106.9zM351.7 448.2c0-29.5 23.9-53.5 53.5-53.5s53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5-53.5-23.9-53.5-53.5zm157.9 267.1c-67.8 0-123.8-47.5-132.3-109h264.6c-8.6 61.5-64.5 109-132.3 109zm110-213.7c-29.5 0-53.5-23.9-53.5-53.5s23.9-53.5 53.5-53.5 53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5zM867.2 644.5V453.1h26.5c19.4 0 35.1 15.7 35.1 35.1v121.1c0 19.4-15.7 35.1-35.1 35.1h-26.5zM95.2 609.4V488.2c0-19.4 15.7-35.1 35.1-35.1h26.5v191.3h-26.5c-19.4 0-35.1-15.7-35.1-35.1zM561.5 149.6c0 23.4-15.6 43.3-36.9 49.7v44.9h-30v-44.9c-21.4-6.5-36.9-26.3-36.9-49.7 0-28.6 23.3-51.9 51.9-51.9s51.9 23.3 51.9 51.9z"
+            />
+          </svg>
+          <!-- prettier-ignore -->
+          <div class="message-text"> Hey there  <br /> How can I help you today? </div>
+        </div>
+      </div>
+      <!-- Chatbot Footer -->
+      <div class="chat-footer">
+        <form action="#" class="chat-form">
+          <textarea placeholder="Message..." class="message-input" required></textarea>
+          <div class="chat-controls">
+            <button type="button" id="emoji-picker" class="material-symbols-outlined">sentiment_satisfied</button>
+            <div class="file-upload-wrapper">
+              <input type="file" accept="image/*" id="file-input" hidden />
+              <img src="#" />
+              <button type="button" id="file-upload" class="material-symbols-rounded">attach_file</button>
+              <button type="button" id="file-cancel" class="material-symbols-rounded">close</button>
+            </div>
+            <button type="submit" id="send-message" class="material-symbols-rounded">arrow_upward</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Linking Emoji Mart script for emoji picker -->
+    <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
+    <!-- Linking custom script -->
+<script src="chat.js"></Script>
+  <!-- JAVASCRIPT -->
+  <script>
+    let currentSlideIndex = 0;
+    const slides = document.querySelectorAll('.gallery-slide');
+    const thumbs = document.querySelectorAll('.thumb-item');
+    const totalSlides = slides.length;
+
+    // Update slide counter
+    document.getElementById('total-slides').textContent = totalSlides.toString().padStart(2, '0');
+
+    function showSlide(index) {
+      // Remove active class from all slides and thumbs
+      slides.forEach(slide => slide.classList.remove('active'));
+      thumbs.forEach(thumb => thumb.classList.remove('active'));
+
+      // Add active class to current slide and thumb
+      slides[index].classList.add('active');
+      thumbs[index].classList.add('active');
+
+      // Update counter
+      document.getElementById('current-slide').textContent = (index + 1).toString().padStart(2, '0');
+      
+      currentSlideIndex = index;
+    }
+
+    function nextSlide() {
+      const nextIndex = (currentSlideIndex + 1) % totalSlides;
+      showSlide(nextIndex);
+    }
+
+    function previousSlide() {
+      const prevIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
+      showSlide(prevIndex);
+    }
+
+    // Auto-play slideshow every 5 seconds
+    setInterval(nextSlide, 5000);
+
+    // Gallery filter function
+    function filterGallery(category) {
+      const items = document.querySelectorAll('.gallery-item');
+      const tabs = document.querySelectorAll('.filter-tab');
+
+      // Update active tab
+      tabs.forEach(tab => tab.classList.remove('active'));
+      event.target.classList.add('active');
+
+      // Filter items with smooth transition
+      items.forEach((item, index) => {
+        if (category === 'all' || item.dataset.category === category) {
+          item.style.display = 'block';
+          item.style.animationDelay = `${index * 0.1}s`;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    // Modal functions
+    function openModal(imageSrc) {
+      const modal = document.getElementById('modal');
+      const modalImg = document.getElementById('modal-img');
+      
+      modal.classList.add('active');
+      modalImg.src = imageSrc;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('modal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Smooth scroll for CTA button
+    document.querySelector('.primary-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector('#gallery').scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  </script>
+<script>
+    
+   // Enhanced Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.style.transform = 'translateY(0)';
+                navbar.style.opacity = '0.95';
+                navbar.querySelector('.bg-white\\/95').classList.add('shadow-xl');
+            } else {
+                navbar.style.transform = 'translateY(0)';
+                navbar.style.opacity = '1';
+                navbar.querySelector('.bg-white\\/95').classList.remove('shadow-xl');
+            }
+        });
+
+        // Enhanced hover effects for navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+           
+            link.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Sub navbar functionality - show/hide on About click
+        const subNavbar = document.getElementById('sub-navbar');
+        const aboutLink = document.querySelector('a[href="about.html"]');
+       
+        aboutLink.addEventListener('click', function(e) {
+            e.preventDefault();
+           
+            if (subNavbar.classList.contains('hidden')) {
+                // Show sub navbar
+                subNavbar.classList.remove('hidden');
+                setTimeout(() => {
+                    subNavbar.style.opacity = '1';
+                    subNavbar.style.transform = 'translateY(0)';
+                }, 10);
+            } else {
+                // Hide sub navbar
+                subNavbar.style.opacity = '0';
+                subNavbar.style.transform = 'translateY(-4px)';
+                setTimeout(() => {
+                    subNavbar.classList.add('hidden');
+                }, 300);
+            }
+        });
+
+        // Hide sub navbar when clicking on other nav links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            if (link.getAttribute('href') !== 'about.html') {
+                link.addEventListener('click', function() {
+                    subNavbar.style.opacity = '0';
+                    subNavbar.style.transform = 'translateY(-4px)';
+                    setTimeout(() => {
+                        subNavbar.classList.add('hidden');
+                    }, 300);
+                });
+            }
+        });
+
+        // Enhanced mobile menu with slide animation
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        const mobileMoreLink = document.getElementById('mobile-more-link');
+        const mobileMoreSubmenu = document.getElementById('mobile-more-submenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+           
+            if (navMenu.classList.contains('hidden')) {
+                navMenu.classList.remove('hidden');
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    navMenu.style.opacity = '1';
+                    navMenu.style.transform = 'translateY(0)';
+                }, 10);
+            } else {
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    navMenu.classList.add('hidden');
+                }, 300);
+            }
+           
+            // Animate hamburger menu
+            const spans = mobileMenuBtn.querySelectorAll('span');
+            if (mobileMenuBtn.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        // Mobile: toggle More submenu
+        if (mobileMoreLink && mobileMoreSubmenu) {
+            mobileMoreLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                mobileMoreSubmenu.classList.toggle('hidden');
+                const icon = mobileMoreLink.querySelector('.material-symbols-rounded');
+                if (icon) {
+                    icon.textContent = mobileMoreSubmenu.classList.contains('hidden') ? 'expand_more' : 'expand_less';
+                }
+            });
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                // Special handling for About link in mobile menu
+                if (link.getAttribute('href') === 'about.html') {
+                    // Don't close mobile menu for About link, let it handle sub navbar
+                    return;
+                }
+                // Keep menu open when toggling More submenu
+                if (link.id === 'mobile-more-link') {
+                    return;
+                }
+               
+                mobileMenuBtn.classList.remove('active');
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    navMenu.classList.add('hidden');
+                }, 300);
+               
+                // Reset hamburger menu
+                const spans = mobileMenuBtn.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+               
+                // Hide sub navbar when clicking other links
+                subNavbar.style.opacity = '0';
+                subNavbar.style.transform = 'translateY(-4px)';
+                setTimeout(() => {
+                    subNavbar.classList.add('hidden');
+                }, 300);
+            });
+        });
+
+        // Handle About link in mobile menu
+        const mobileAboutLink = document.querySelector('#nav-menu a[href="about.html"]');
+        if (mobileAboutLink) {
+            mobileAboutLink.addEventListener('click', function(e) {
+                e.preventDefault();
+               
+                // Close the main mobile menu first
+                mobileMenuBtn.classList.remove('active');
+                navMenu.style.opacity = '0';
+                navMenu.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    navMenu.classList.add('hidden');
+                }, 300);
+               
+                // Reset hamburger menu
+                const spans = mobileMenuBtn.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+               
+                if (subNavbar.classList.contains('hidden')) {
+                    // Show sub navbar
+                    subNavbar.classList.remove('hidden');
+                    setTimeout(() => {
+                        subNavbar.style.opacity = '1';
+                        subNavbar.style.transform = 'translateY(0)';
+                    }, 10);
+                } else {
+                    // Hide sub navbar
+                    subNavbar.style.opacity = '0';
+                    subNavbar.style.transform = 'translateY(-4px)';
+                    setTimeout(() => {
+                        subNavbar.classList.add('hidden');
+                    }, 300);
+                }
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent);
+                const increment = target / 100;
+                let current = 0;
+               
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.ceil(current) + '+';
+                        setTimeout(updateCounter, 20);
+                    } else {
+                        counter.textContent = target + '+';
+                    }
+                };
+               
+                updateCounter();
+            });
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                   
+                    // Trigger counter animation for about section
+                    if (entry.target.id === 'about') {
+                        animateCounters();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for animations
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 0.8s ease-out';
+            observer.observe(section);
+        });
+
+        // Magnetic hover effect
+        document.querySelectorAll('.magnetic-hover').forEach(element => {
+            element.addEventListener('mousemove', (e) => {
+                const rect = element.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+               
+                element.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(1.05)`;
+            });
+           
+            element.addEventListener('mouseleave', () => {
+                element.style.transform = 'translate(0, 0) scale(1)';
+            });
+        });
+
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.floating-element');
+           
+            parallaxElements.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1);
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // 3D tilt interaction for logo
+        (function() {
+            const logo = document.getElementById('site-logo');
+            if (!logo) return;
+            const maxTilt = 12; // degrees
+            const scale = 1.04;
+            const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+            if (!isFinePointer) return; // skip on touch
+
+            const handleMove = (e) => {
+                const rect = logo.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const pctX = (x / rect.width) * 2 - 1; // -1 to 1
+                const pctY = (y / rect.height) * 2 - 1; // -1 to 1
+                const rotateY = pctX * maxTilt;
+                const rotateX = -pctY * maxTilt;
+                logo.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
+            };
+
+            const reset = () => {
+                logo.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+            };
+
+            logo.addEventListener('mousemove', handleMove);
+            logo.addEventListener('mouseleave', reset);
+        })();
+
+        // Video Modal Functionality
+        const videoModal = document.getElementById('video-modal');
+        const campusVideoBtn = document.getElementById('campus-video-btn');
+        const closeVideoModal = document.getElementById('close-video-modal');
+        const campusVideo = document.getElementById('campus-video');
+        const videoPlaceholder = document.getElementById('video-placeholder');
+
+        // Open video modal
+        campusVideoBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            videoModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+           
+            // Check if video file exists
+            const videoSrc = 'gns.mp4';
+            fetch(videoSrc, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        // Video file exists, show video player
+                        campusVideo.style.display = 'block';
+                        videoPlaceholder.style.display = 'none';
+                        campusVideo.src = videoSrc;
+                    } else {
+                        // Video file doesn't exist, show placeholder
+                        campusVideo.style.display = 'none';
+                        videoPlaceholder.style.display = 'flex';
+                    }
+                })
+                .catch(() => {
+                    // Error fetching video, show placeholder
+                    campusVideo.style.display = 'none';
+                    videoPlaceholder.style.display = 'flex';
+                });
+        });
+
+        // Close video modal
+        closeVideoModal.addEventListener('click', function() {
+            videoModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            // Pause video when closing
+            if (campusVideo.src) {
+                campusVideo.pause();
+            }
+        });
+
+        // Close modal when clicking outside
+        videoModal.addEventListener('click', function(e) {
+            if (e.target === videoModal) {
+                videoModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+                if (campusVideo.src) {
+                    campusVideo.pause();
+                }
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
+                videoModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+                if (campusVideo.src) {
+                    campusVideo.pause();
+                }
+            }
+        });
+    </script>
+   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const chatBody = document.querySelector(".chat-body");
+      let autoScrollEnabled = true; // default locked to bottom
+   
+      // Auto-scroll function
+      function autoScroll() {
+        if (autoScrollEnabled) {
+          chatBody.scrollTo({
+            top: chatBody.scrollHeight,
+            behavior: "smooth"
+          });
+        }
+      }
+   
+      // Detect if user scrolls away from bottom
+      chatBody.addEventListener("scroll", () => {
+        const atBottom =
+          chatBody.scrollHeight - chatBody.scrollTop <= chatBody.clientHeight + 10;
+        autoScrollEnabled = atBottom; // only enable if near bottom
+      });
+   
+      // Watch for new messages
+      const observer = new MutationObserver(autoScroll);
+      observer.observe(chatBody, { childList: true, subtree: true });
+   
+      // Scroll when chatbot is opened
+      document.querySelector("#chatbot-toggler").addEventListener("click", () => {
+        setTimeout(autoScroll, 100);
+      });
+    });
+
+</script>
+</body>
+</html>
